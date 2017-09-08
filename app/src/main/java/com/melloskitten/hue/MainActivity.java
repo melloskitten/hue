@@ -16,6 +16,8 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     public static TileAdapter tileAdapter;
+    public static int x = 0;
+    public static int y = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (action) {
                     case DragEvent.ACTION_DRAG_STARTED:
                         // this means a dragging has just started from that specific view
-                        Toast.makeText(view.getContext(), "The drop has started.", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(view.getContext(), "The drop has started.", Toast.LENGTH_LONG).show();
                         return true;
 
                     case DragEvent.ACTION_DRAG_ENTERED:
@@ -65,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
                         return true;
 
                     case DragEvent.ACTION_DROP:
+                        x = (int) dragEvent.getX();
+                        y = (int) dragEvent.getY();
                         return true;
 
                     case DragEvent.ACTION_DRAG_ENDED:
@@ -72,12 +76,11 @@ public class MainActivity extends AppCompatActivity {
                         if (dragEvent.getResult()) {
                             Toast.makeText(view.getContext(), "The drop was handled.", Toast.LENGTH_LONG).show();
 
-                            int position = gridView.pointToPosition((int) dragEvent.getX(), (int) dragEvent.getY());
-
+                            int position = gridView.pointToPosition(x,y);
 
                             GridView gridView = (GridView) view;
                             TextView textView = (TextView) gridView.getChildAt(position);
-                            textView.setBackgroundColor(Color.MAGENTA);
+                            textView.setBackgroundColor(Color.RED);
 
 
                         } else {

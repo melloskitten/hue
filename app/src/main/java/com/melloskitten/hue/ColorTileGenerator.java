@@ -45,7 +45,7 @@ public class ColorTileGenerator {
 
     // FIXME: only generates the first row for the moment.
     public void generateColorRow (Color leftColor, Color rightColor) {
-        float standardWeight = 1 / columnLength;
+        float standardWeight = 1 / ((float) (columnLength));
 
         for (int i = 0; i < columnLength; i++) {
             float weight = i * standardWeight;

@@ -15,23 +15,21 @@ import android.widget.TextView;
 
 public class TileAdapter extends BaseAdapter {
     private Context mContext;
-    private String[] colorCodes;
-    private Color[] colorTiles;
+    private Color[] colors;
 
-    public TileAdapter (Context c, String[] colorCodes) {
+    public TileAdapter (Context c, Color[] colorCodes) {
         this.mContext = c;
-        this.colorCodes = colorCodes;
+        this.colors = colorCodes;
     }
 
     @Override
     public int getCount() {
-        return colorCodes.length;
+        return colors.length;
     }
 
     @Override
     public Object getItem(int i) {
-        // FIXME return the actual color tile object.
-        return colorCodes[i];
+        return colors[i];
     }
 
     @Override
@@ -41,20 +39,40 @@ public class TileAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
-        TextView dummyTextView = new TextView(mContext);
-        dummyTextView.setBackgroundColor(Color.parseColor(colorCodes[position]));
-        int maxHeight = colorCodes.length/5; // divided by the number of columns
-        dummyTextView.setHeight(viewGroup.getHeight()/maxHeight);
-        return dummyTextView;
+        TextView tileView = new TextView(mContext);
 
-        Tex
+        if (colors[position] == null) {
+            tileView.setBackgroundColor(Color.BLACK);
+
+            // FIXME: Fix this standardized height
+            int maxHeight = colors.length / 5;
+            tileView.setHeight(viewGroup.getHeight()/maxHeight);
+            return tileView;
+        }
+
+        Color curCol = colors[position];
+        tileView.setBackgroundColor(Color.rgb(curCol.red(), curCol.green(), curCol.blue()));
+
+        // FIXME: Fix this standardized height
+        int maxHeight = colors.length / 5;
+        tileView.setHeight(viewGroup.getHeight()/maxHeight);
+        return tileView;
+
+
+
+        //TextView dummyTextView = new TextView(mContext);
+        //dummyTextView.setBackgroundColor(Color.parseColor(colors[position]));
+        //int maxHeight = colors.length/5; // divided by the number of columns
+        //dummyTextView.setHeight(viewGroup.getHeight()/maxHeight);
+        //return dummyTextView;
+
     }
 
     // Swap method for changing two Tiles
     public void swap(int oldPos, int newPos) {
-       String temp = colorCodes[oldPos];
-        colorCodes[oldPos] = colorCodes[newPos];
-        colorCodes[newPos] = temp;
+        Color temp = colors[oldPos];
+        colors[oldPos] = colors[newPos];
+        colors[newPos] = temp;
 
         this.notifyDataSetChanged();
 

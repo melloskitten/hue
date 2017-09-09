@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
         final GridView gridView = (GridView) findViewById(R.id.gridView);
 
+
+
         String[] LEVEL_1 = {"#e3e3e3", "#FFFFFF", "#000000", "#e300e3", "#e3e3e3", "#e3e3e3", "#FFFFFF", "#000000", "#e3e303", "#003000", "#e3e3e3", "#FFFFFF", "#e3e3e3", "#FFFFFF", "#003000"};
 
 
@@ -36,17 +38,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        // FIXME: Removing longpress for the moment cause it takes too long imo
-
-
         gridView.setOnTouchListener(new View.OnTouchListener() {
                                         @Override
                                         public boolean onTouch(View view, MotionEvent motionEvent) {
 
                                             switch (motionEvent.getAction()){
                                                 case MotionEvent.ACTION_DOWN:
-                                                    //Toast.makeText(view.getContext(), "The touch started...", Toast.LENGTH_SHORT).show();
-
                                                     int x = (int) motionEvent.getX();
                                                     int y = (int) motionEvent.getY();
                                                     oldPos = gridView.pointToPosition(x,y);
@@ -100,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                             case DragEvent.ACTION_DRAG_ENDED:
                                 // Does a getResult(), and displays what happened.
                                 if (dragEvent.getResult()) {
-                                    Toast.makeText(view.getContext(), "The drop was handled.", Toast.LENGTH_LONG).show();
+                                    //Toast.makeText(view.getContext(), "The drop was handled.", Toast.LENGTH_LONG).show();
 
                                     int position = gridView.pointToPosition(newX, newY);
 
@@ -117,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                                 } else {
-                                    Toast.makeText(view.getContext(), "The drop didn't work.", Toast.LENGTH_LONG).show();
+                                    //Toast.makeText(view.getContext(), "The drop didn't work.", Toast.LENGTH_LONG).show();
 
                                 }
 

@@ -16,6 +16,7 @@ import android.widget.TextView;
 public class TileAdapter extends BaseAdapter {
     private Context mContext;
     private String[] colorCodes;
+    private Color[] colorTiles;
 
     public TileAdapter (Context c, String[] colorCodes) {
         this.mContext = c;
@@ -45,6 +46,8 @@ public class TileAdapter extends BaseAdapter {
         int maxHeight = colorCodes.length/5; // divided by the number of columns
         dummyTextView.setHeight(viewGroup.getHeight()/maxHeight);
         return dummyTextView;
+
+        Tex
     }
 
     // Swap method for changing two Tiles

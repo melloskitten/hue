@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
 
     Color COL_1 = Color.valueOf(Color.parseColor("#555b6e"));
     Color COL_2 = Color.valueOf(Color.parseColor("#ffd6ba"));
+    Color COL_3 = Color.valueOf(Color.parseColor("#89b0ae"));
+    Color COL_4 = Color.valueOf(Color.parseColor("#bee3db"));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +37,10 @@ public class MainActivity extends AppCompatActivity {
 
         String[] LEVEL_1 = {"#e3e3e3", "#FFFFFF", "#000000", "#e300e3", "#e3e3e3", "#e3e3e3", "#FFFFFF", "#000000", "#e3e303", "#003000", "#e3e3e3", "#FFFFFF", "#e3e3e3", "#FFFFFF", "#003000"};
 
-        ColorTileGenerator generator = new ColorTileGenerator(COL_1, COL_2, COL_1, COL_2, 5,3);
-        generator.generateColorRow(COL_1, COL_2);
+        ColorTileGenerator generator = new ColorTileGenerator(COL_1, COL_2, COL_3, COL_4, 5,3);
+        //generator.generateColorRow(COL_1, COL_2, 5);
+        //generator.generateColorColumn(COL_1, COL_2, 2);
+        generator.generateColorTiles();
 
         gridView.setAdapter(new TileAdapter(this, generator.generatedColors));
         gridView.setNumColumns(5);

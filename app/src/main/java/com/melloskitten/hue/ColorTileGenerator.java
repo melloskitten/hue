@@ -43,16 +43,41 @@ public class ColorTileGenerator {
         return middle;
     }
 
-    // FIXME: only generates the first row for the moment.
-    public void generateColorRow (Color leftColor, Color rightColor) {
+
+    public void generateColorRow (Color leftColor, Color rightColor, int startIndex) {
         float standardWeight = 1 / ((float) (columnLength));
 
         for (int i = 0; i < columnLength; i++) {
             float weight = i * standardWeight;
             Color interpolatedColor = interpolateColor(leftColor, rightColor, weight);
-            generatedColors[i] = interpolatedColor;
+            generatedColors[startIndex + i] = interpolatedColor;
         }
 
+    }
+
+    public void generateColorColumn (Color topColor, Color bottomColor, int startIndex) {
+        float standardWeight = 1 / ((float) (rowLength));
+
+        for (int i = 0; i < (rowLength); i++) {
+            float weight = i * standardWeight;
+            Color interpolatedColor = interpolateColor(topColor, bottomColor, weight);
+            generatedColors[(i * columnLength) + startIndex ] = interpolatedColor;
+        }
+    }
+
+    public void generateColorTiles () {
+
+        // First generate first and last column
+        generateColorColumn(upperLeftColor, lowerLeftColor, 0);
+        generateColorColumn(upperRightColor, upperRightColor, columnLength-1);
+
+        // Generate the missing rows
+        for (int i = 0; i < rowLength; i++) {
+
+            Color leftColor = generatedColors[i * columnLength];
+            Color rightColor = generatedColors[i * columnLength + (columnLength-1)];
+            generateColorRow(leftColor, rightColor, i * columnLength);
+        }
     }
 
 

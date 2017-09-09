@@ -35,11 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        String[] LEVEL_1 = {"#e3e3e3", "#FFFFFF", "#000000", "#e300e3", "#e3e3e3", "#e3e3e3", "#FFFFFF", "#000000", "#e3e303", "#003000", "#e3e3e3", "#FFFFFF", "#e3e3e3", "#FFFFFF", "#003000"};
-
         ColorTileGenerator generator = new ColorTileGenerator(COL_1, COL_2, COL_3, COL_4, 5,3);
-        //generator.generateColorRow(COL_1, COL_2, 5);
-        //generator.generateColorColumn(COL_1, COL_2, 2);
+
         generator.generateColorTiles();
 
         gridView.setAdapter(new TileAdapter(this, generator.generatedColors));
@@ -81,15 +78,12 @@ public class MainActivity extends AppCompatActivity {
                         // Handles each of the expected events:
                         switch (action) {
                             case DragEvent.ACTION_DRAG_STARTED:
-                                // this means a dragging has just started from that specific view
-                                //Toast.makeText(view.getContext(), "The drop has started.", Toast.LENGTH_LONG).show();
 
                                 int oldX = (int) dragEvent.getX();
                                 int oldY = (int) dragEvent.getY();
 
                                 oldPos = gridView.pointToPosition(oldX, oldY);
-                                //String oldPosString = Integer.toString(oldPos);
-                                //Toast.makeText(view.getContext(), "The action started from  : " + oldPosString, Toast.LENGTH_LONG).show();
+
                                 return true;
 
                             case DragEvent.ACTION_DRAG_ENTERED:
@@ -106,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
                             case DragEvent.ACTION_DRAG_ENDED:
                                 // Does a getResult(), and displays what happened.
                                 if (dragEvent.getResult()) {
-                                    //Toast.makeText(view.getContext(), "The drop was handled.", Toast.LENGTH_LONG).show();
 
                                     int position = gridView.pointToPosition(newX, newY);
 
@@ -117,13 +110,8 @@ public class MainActivity extends AppCompatActivity {
                                     TileAdapter tileAdapter = (TileAdapter) gridView.getAdapter();
                                     tileAdapter.swap(index, oldPos);
 
-                                    //String indexText = String.valueOf(index);
-                                    //textView.setText(indexText);
-                                    //textView.setBackgroundColor(Color.RED);
-
 
                                 } else {
-                                    //Toast.makeText(view.getContext(), "The drop didn't work.", Toast.LENGTH_LONG).show();
 
                                 }
 

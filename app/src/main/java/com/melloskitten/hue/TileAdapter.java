@@ -29,6 +29,7 @@ public class TileAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
+        // FIXME return the actual color tile object.
         return colorCodes[i];
     }
 
@@ -45,6 +46,18 @@ public class TileAdapter extends BaseAdapter {
         dummyTextView.setHeight(viewGroup.getHeight()/maxHeight);
         return dummyTextView;
     }
+
+    // Swap method for changing two Tiles
+    public void swap(int oldPos, int newPos) {
+       String temp = colorCodes[oldPos];
+        colorCodes[oldPos] = colorCodes[newPos];
+        colorCodes[newPos] = temp;
+
+        this.notifyDataSetChanged();
+
+
+    }
+
 }
 
 

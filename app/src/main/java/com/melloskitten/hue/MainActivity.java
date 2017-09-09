@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.DragEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -16,8 +17,9 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     public static TileAdapter tileAdapter;
-    public static int x = 0;
-    public static int y = 0;
+    public static int newX = 0;
+    public static int newY = 0;
+    public static int oldPos = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,68 +35,99 @@ public class MainActivity extends AppCompatActivity {
         gridView.setNumColumns(5);
 
 
-        // Long Press
-        gridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                View.DragShadowBuilder myShadow = new View.DragShadowBuilder(view);
-
-                view.startDrag(null, myShadow, null, 0);
-
-                return true;
-            }
-        });
-
-        gridView.setOnDragListener(new AdapterView.OnDragListener() {
-            @Override
-            public boolean onDrag(View view, DragEvent dragEvent) {
-
-                final int action = dragEvent.getAction();
-
-                // Handles each of the expected events:
-                switch (action) {
-                    case DragEvent.ACTION_DRAG_STARTED:
-                        // this means a dragging has just started from that specific view
-                        //Toast.makeText(view.getContext(), "The drop has started.", Toast.LENGTH_LONG).show();
-                        return true;
-
-                    case DragEvent.ACTION_DRAG_ENTERED:
-                        return true;
-
-                    case DragEvent.ACTION_DRAG_LOCATION:
-                        return true;
-
-                    case DragEvent.ACTION_DROP:
-                        x = (int) dragEvent.getX();
-                        y = (int) dragEvent.getY();
-                        return true;
-
-                    case DragEvent.ACTION_DRAG_ENDED:
-                        // Does a getResult(), and displays what happened.
-                        if (dragEvent.getResult()) {
-                            Toast.makeText(view.getContext(), "The drop was handled.", Toast.LENGTH_LONG).show();
-
-                            int position = gridView.pointToPosition(x,y);
-
-                            GridView gridView = (GridView) view;
-                            TextView textView = (TextView) gridView.getChildAt(position);
-                            textView.setBackgroundColor(Color.RED);
+        // FIXME: Removing longpress for the moment cause it takes too long imo
 
 
-                        } else {
-                            Toast.makeText(view.getContext(), "The drop didn't work.", Toast.LENGTH_LONG).show();
+        gridView.setOnTouchListener(new View.OnTouchListener() {
+                                        @Override
+                                        public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                                            switch (motionEvent.getAction()){
+                                                case MotionEvent.ACTION_DOWN:
+                                                    //Toast.makeText(view.getContext(), "The touch started...", Toast.LENGTH_SHORT).show();
+
+                                                    int x = (int) motionEvent.getX();
+                                                    int y = (int) motionEvent.getY();
+                                                    oldPos = gridView.pointToPosition(x,y);
+                                                    View tileView = gridView.getChildAt(oldPos);
+
+
+                                                    View.DragShadowBuilder myShadow = new View.DragShadowBuilder(tileView);
+
+                                                    tileView.startDrag(null, myShadow, null, 0);
+
+                                            }
+
+
+
+                                            return false;
+                                        }
+                                    });
+
+
+                gridView.setOnDragListener(new AdapterView.OnDragListener() {
+                    @Override
+                    public boolean onDrag(View view, DragEvent dragEvent) {
+
+                        final int action = dragEvent.getAction();
+
+                        // Handles each of the expected events:
+                        switch (action) {
+                            case DragEvent.ACTION_DRAG_STARTED:
+                                // this means a dragging has just started from that specific view
+                                //Toast.makeText(view.getContext(), "The drop has started.", Toast.LENGTH_LONG).show();
+
+                                int oldX = (int) dragEvent.getX();
+                                int oldY = (int) dragEvent.getY();
+
+                                oldPos = gridView.pointToPosition(oldX, oldY);
+                                //String oldPosString = Integer.toString(oldPos);
+                                //Toast.makeText(view.getContext(), "The action started from  : " + oldPosString, Toast.LENGTH_LONG).show();
+                                return true;
+
+                            case DragEvent.ACTION_DRAG_ENTERED:
+                                return true;
+
+                            case DragEvent.ACTION_DRAG_LOCATION:
+                                return true;
+
+                            case DragEvent.ACTION_DROP:
+                                newX = (int) dragEvent.getX();
+                                newY = (int) dragEvent.getY();
+                                return true;
+
+                            case DragEvent.ACTION_DRAG_ENDED:
+                                // Does a getResult(), and displays what happened.
+                                if (dragEvent.getResult()) {
+                                    Toast.makeText(view.getContext(), "The drop was handled.", Toast.LENGTH_LONG).show();
+
+                                    int position = gridView.pointToPosition(newX, newY);
+
+                                    GridView gridView = (GridView) view;
+                                    TextView textView = (TextView) gridView.getChildAt(position);
+                                    int index = gridView.pointToPosition(newX, newY);
+
+                                    TileAdapter tileAdapter = (TileAdapter) gridView.getAdapter();
+                                    tileAdapter.swap(index, oldPos);
+
+                                    //String indexText = String.valueOf(index);
+                                    //textView.setText(indexText);
+                                    //textView.setBackgroundColor(Color.RED);
+
+
+                                } else {
+                                    Toast.makeText(view.getContext(), "The drop didn't work.", Toast.LENGTH_LONG).show();
+
+                                }
+
+                                return true;
+
 
                         }
-
-                        return true;
-
-
-                }
-                return false;
-            }
-        });
+                        return false;
+                    }
+                });
 
     }
 

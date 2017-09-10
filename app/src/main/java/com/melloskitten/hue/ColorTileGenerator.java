@@ -12,71 +12,75 @@ import android.graphics.Color;
 
 public class ColorTileGenerator {
 
-    public Color[] generatedColors;
+    public ColorTile[] generatedColorTiles;
     private final int columnLength;
     private final int rowLength;
-    public Color upperLeftColor;
-    public Color upperRightColor;
-    public Color lowerLeftColor;
-    public Color lowerRightColor;
+    public ColorTile upperLeftTile;
+    public ColorTile upperRightTile;
+    public ColorTile lowerLeftTile;
+    public ColorTile lowerRightTile;
 
-    public ColorTileGenerator (Color upperLeftColor, Color upperRightColor,
-                               Color lowerLeftColor, Color lowerRightColor,
+    public ColorTileGenerator (ColorTile upperLeftTile, ColorTile upperRightTile,
+                               ColorTile lowerLeftTile, ColorTile lowerRightTile,
                                int columnLength, int rowLength) {
-        this.upperLeftColor = upperLeftColor;
-        this.upperRightColor = upperRightColor;
-        this.lowerLeftColor = lowerLeftColor;
-        this.lowerRightColor = lowerRightColor;
+        this.upperLeftTile = upperLeftTile;
+        this.upperRightTile = upperRightTile;
+        this.lowerLeftTile = lowerLeftTile;
+        this.lowerRightTile = lowerRightTile;
         this.columnLength = columnLength;
         this.rowLength = rowLength;
-        this.generatedColors = new Color[rowLength*columnLength];
+        this.generatedColorTiles = new ColorTile[rowLength*columnLength];
 
     }
 
-    public Color interpolateColor (Color start, Color end, float weight) {
+    public ColorTile interpolateColor (ColorTile start, ColorTile end, float weight) {
 
-        float red = start.red() + (end.red()- start.red()) * weight;
-        float green = start.green() + (end.green() - start.green()) * weight;
-        float blue = start.blue() + (end.blue() - start.blue()) * weight;
+        Color startCol = start.getRealColor();
+        Color endCol = end.getRealColor();
 
-        Color middle = Color.valueOf(Color.rgb(red, green, blue));
-        return middle;
+        float red = startCol.red() + (endCol.red()- startCol.red()) * weight;
+        float green = startCol.green() + (endCol.green() - startCol.green()) * weight;
+        float blue = startCol.blue() + (endCol.blue() - startCol.blue()) * weight;
+
+        Color middleCol = Color.valueOf(Color.rgb(red, green, blue));
+        ColorTile middleTile = new ColorTile(middleCol);
+        return middleTile;
     }
 
 
-    public void generateColorRow (Color leftColor, Color rightColor, int startIndex) {
+    public void generateColorRow (ColorTile leftColorTile, ColorTile rightColorTile, int startIndex) {
         float standardWeight = 1 / ((float) (columnLength));
 
         for (int i = 0; i < columnLength; i++) {
             float weight = i * standardWeight;
-            Color interpolatedColor = interpolateColor(leftColor, rightColor, weight);
-            generatedColors[startIndex + i] = interpolatedColor;
+            ColorTile interpolatedColorTile = interpolateColor(leftColorTile, rightColorTile, weight);
+            generatedColorTiles[startIndex + i] = interpolatedColorTile;
         }
 
     }
 
-    public void generateColorColumn (Color topColor, Color bottomColor, int startIndex) {
+    public void generateColorColumn (ColorTile topColorTile, ColorTile bottomColorTile, int startIndex) {
         float standardWeight = 1 / ((float) (rowLength));
 
         for (int i = 0; i < (rowLength); i++) {
             float weight = i * standardWeight;
-            Color interpolatedColor = interpolateColor(topColor, bottomColor, weight);
-            generatedColors[(i * columnLength) + startIndex ] = interpolatedColor;
+            ColorTile interpolatedColorTile = interpolateColor(topColorTile, bottomColorTile, weight);
+            generatedColorTiles[(i * columnLength) + startIndex ] = interpolatedColorTile;
         }
     }
 
     public void generateColorTiles () {
 
         // First generate first and last column
-        generateColorColumn(upperLeftColor, lowerLeftColor, 0);
-        generateColorColumn(upperRightColor, upperRightColor, columnLength-1);
+        generateColorColumn(upperLeftTile, lowerLeftTile, 0);
+        generateColorColumn(upperRightTile, lowerRightTile, columnLength-1);
 
         // Generate the missing rows
         for (int i = 0; i < rowLength; i++) {
 
-            Color leftColor = generatedColors[i * columnLength];
-            Color rightColor = generatedColors[i * columnLength + (columnLength-1)];
-            generateColorRow(leftColor, rightColor, i * columnLength);
+            ColorTile leftColorTile = generatedColorTiles[i * columnLength];
+            ColorTile rightColorTile = generatedColorTiles[i * columnLength + (columnLength-1)];
+            generateColorRow(leftColorTile, rightColorTile, i * columnLength);
         }
     }
 

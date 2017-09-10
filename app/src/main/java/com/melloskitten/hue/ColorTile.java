@@ -20,6 +20,13 @@ public class ColorTile {
         this.isHint = isHint;
     }
 
+    public ColorTile (Color generatedColor) {
+        this.realColor = generatedColor;
+        this.curColor = generatedColor;
+        this.isLocked = false;
+        this.isHint = false;
+    }
+
     public void setCurColor(Color curColor) {
         this.curColor = curColor;
     }

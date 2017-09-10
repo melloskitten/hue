@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         ColorTile[] generatedColorTiles = generator.generatedColorTiles;
         generatedColorTiles = ColorTileScrambler.scramble(generatedColorTiles);
 
-        gridView.setAdapter(new TileAdapter(this, generatedColorTiles));
+        gridView.setAdapter(new TileAdapter(this, generatedColorTiles, 5));
         gridView.setNumColumns(5);
 
 

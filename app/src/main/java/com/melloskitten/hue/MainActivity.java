@@ -38,8 +38,10 @@ public class MainActivity extends AppCompatActivity {
         ColorTileGenerator generator = new ColorTileGenerator(COL_1, COL_2, COL_3, COL_4, 5,3);
 
         generator.generateColorTiles();
+        ColorTile[] generatedColorTiles = generator.generatedColorTiles;
+        generatedColorTiles = ColorTileScrambler.scramble(generatedColorTiles);
 
-        gridView.setAdapter(new TileAdapter(this, generator.generatedColorTiles));
+        gridView.setAdapter(new TileAdapter(this, generatedColorTiles));
         gridView.setNumColumns(5);
 
 

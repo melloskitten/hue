@@ -1,6 +1,7 @@
 package com.melloskitten.hue;
 
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 
 /**
  * Created by sandra on 10.09.17.

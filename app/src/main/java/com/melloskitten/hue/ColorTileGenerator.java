@@ -15,10 +15,17 @@ public class ColorTileGenerator {
     public ColorTile[] generatedColorTiles;
     private final int columnLength;
     private final int rowLength;
+
     public ColorTile upperLeftTile;
     public ColorTile upperRightTile;
     public ColorTile lowerLeftTile;
     public ColorTile lowerRightTile;
+
+    public Color UPPER_LEFT;
+    public Color UPPER_RIGHT;
+    public Color LOWER_LEFT;
+    public Color LOWER_RIGHT;
+
 
     public ColorTileGenerator (ColorTile upperLeftTile, ColorTile upperRightTile,
                                ColorTile lowerLeftTile, ColorTile lowerRightTile,
@@ -30,8 +37,21 @@ public class ColorTileGenerator {
         this.columnLength = columnLength;
         this.rowLength = rowLength;
         this.generatedColorTiles = new ColorTile[rowLength*columnLength];
-
     }
+
+    public ColorTileGenerator(Color UPPER_LEFT, Color UPPER_RIGHT,
+                              Color LOWER_LEFT, Color LOWER_RIGHT,
+                              int columnLength, int rowLength) {
+
+        this.upperLeftTile = new ColorTile(UPPER_LEFT, UPPER_LEFT, false, false);
+        this.upperRightTile = new ColorTile(UPPER_RIGHT, UPPER_RIGHT, false, false);
+        this.lowerLeftTile = new ColorTile(LOWER_LEFT, LOWER_LEFT, false, false);
+        this.lowerRightTile = new ColorTile(LOWER_RIGHT, LOWER_RIGHT, false, false);
+        this.rowLength = rowLength;
+        this.columnLength = columnLength;
+        this.generatedColorTiles = new ColorTile[rowLength*columnLength];
+    }
+
 
     public ColorTile interpolateColor (ColorTile start, ColorTile end, float weight) {
 

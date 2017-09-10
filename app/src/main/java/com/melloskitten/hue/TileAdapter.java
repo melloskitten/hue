@@ -15,21 +15,21 @@ import android.widget.TextView;
 
 public class TileAdapter extends BaseAdapter {
     private Context mContext;
-    private Color[] colors;
+    private ColorTile[] colorTiles;
 
-    public TileAdapter (Context c, Color[] colorCodes) {
+    public TileAdapter (Context c, ColorTile[] colorTiles) {
         this.mContext = c;
-        this.colors = colorCodes;
+        this.colorTiles = colorTiles;
     }
 
     @Override
     public int getCount() {
-        return colors.length;
+        return colorTiles.length;
     }
 
     @Override
     public Object getItem(int i) {
-        return colors[i];
+        return colorTiles[i];
     }
 
     @Override
@@ -41,29 +41,33 @@ public class TileAdapter extends BaseAdapter {
     public View getView(int position, View view, ViewGroup viewGroup) {
         TextView tileView = new TextView(mContext);
 
-        if (colors[position] == null) {
+        if (colorTiles[position] == null) {
             tileView.setBackgroundColor(Color.BLACK);
 
             // FIXME: Fix this standardized height
-            int maxHeight = colors.length / 5;
+            int maxHeight = colorTiles.length / 5;
             tileView.setHeight(viewGroup.getHeight()/maxHeight);
             return tileView;
         }
 
-        Color curCol = colors[position];
+        ColorTile curTile = colorTiles[position];
+        // Remember, we're only displaying the current color, not the real color
+        // The real color is being used to check if the tile is in its correct
+        // place.
+        Color curCol = curTile.getCurColor();
         tileView.setBackgroundColor(Color.rgb(curCol.red(), curCol.green(), curCol.blue()));
 
         // FIXME: Fix this standardized height
-        int maxHeight = colors.length / 5;
+        int maxHeight = colorTiles.length / 5;
         tileView.setHeight(viewGroup.getHeight()/maxHeight);
         return tileView;
     }
 
     // Swap method for changing two Tiles
     public void swap(int oldPos, int newPos) {
-        Color temp = colors[oldPos];
-        colors[oldPos] = colors[newPos];
-        colors[newPos] = temp;
+        ColorTile temp = colorTiles[oldPos];
+        colorTiles[oldPos] = colorTiles[newPos];
+        colorTiles[newPos] = temp;
 
         this.notifyDataSetChanged();
 

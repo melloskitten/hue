@@ -57,15 +57,6 @@ public class TileAdapter extends BaseAdapter {
         int maxHeight = colors.length / 5;
         tileView.setHeight(viewGroup.getHeight()/maxHeight);
         return tileView;
-
-
-
-        //TextView dummyTextView = new TextView(mContext);
-        //dummyTextView.setBackgroundColor(Color.parseColor(colors[position]));
-        //int maxHeight = colors.length/5; // divided by the number of columns
-        //dummyTextView.setHeight(viewGroup.getHeight()/maxHeight);
-        //return dummyTextView;
-
     }
 
     // Swap method for changing two Tiles

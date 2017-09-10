@@ -7,11 +7,9 @@ import android.graphics.Color;
  */
 
 // This class creates an array of ColorTiles, which are used as the basis of the level.
-
 public class ColorTileGenerator {
 
     // MARK: VARS
-
     // This array holds the generated Tiles.
     public ColorTile[] generatedColorTiles;
 
@@ -55,7 +53,6 @@ public class ColorTileGenerator {
 
 
     // MARK: HELPER FUNCTIONS
-
     // Creates a new ColorTile through the interpolated colors of two ColorTiles
     // with a specific weight.
     public ColorTile interpolateColor (ColorTile start, ColorTile end, float weight) {

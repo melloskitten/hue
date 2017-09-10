@@ -71,6 +71,8 @@ public class TileAdapter extends BaseAdapter {
         return tileView;
     }
 
+
+    // MARK: Helper Methods
     private void setViewForTile(Color color, TextView tileView, ColorTile curTile) {
 
         // FIXME: Make Hint Tiles more prominent, e.g. with circle on them or smth.

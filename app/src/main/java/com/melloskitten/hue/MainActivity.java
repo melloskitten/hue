@@ -34,8 +34,11 @@ public class MainActivity extends AppCompatActivity {
         final GridView gridView = (GridView) findViewById(R.id.gridView);
 
 
+        COL_1 = ColorWrapper.prsCol(getString(R.string.lvl_2_col1));
 
         ColorTileGenerator generator = new ColorTileGenerator(COL_1, COL_2, COL_3, COL_4, 5,3);
+
+
 
         generator.generateColorTiles();
         ColorTile[] generatedColorTiles = generator.generatedColorTiles;

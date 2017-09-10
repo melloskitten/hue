@@ -1,4 +1,28 @@
 <resources>
     <string name="app_name">Hue</string>
     <string name="level_descr">Level</string>
+
+
+
+    <!-- Level 1 Assets -->
+    <string name= "lvl_1_name">Pilot</string>
+
+    <string name= "lvl_1_col1">#555b6e</string>
+    <string name= "lvl_1_col2">#ffd6ba</string>
+    <string name= "lvl_1_col3">#89b0ae</string>
+    <string name= "lvl_1_col4">#bee3db</string>
+
+    <integer name="lvl_1_max_turns">10</integer>
+
+
+
+    <!-- Level 2 Assets -->
+    <string name= "lvl_2_name">Coffe Mug</string>
+
+    <string name= "lvl_2_col1">#2f2d2e</string>
+    <string name= "lvl_2_col2">#792359</string>
+    <string name= "lvl_2_col3">#fd3e81</string>
+    <string name= "lvl_2_col4">#c1666b</string>
+
+    <integer name="lvl_2_max_turns">10</integer>
 </resources>

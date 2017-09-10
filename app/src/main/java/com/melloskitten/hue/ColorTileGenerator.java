@@ -6,27 +6,28 @@ import android.graphics.Color;
  * Created by sandra on 09.09.17.
  */
 
-// TODO: Fix the desc of this class its horrendous
-// A Class for generating a Color Table based on color inputs in #XXXXXX String format and the
-// number of columns and rows of the level.
+// This class creates an array of ColorTiles, which are used as the basis of the level.
 
 public class ColorTileGenerator {
 
+    // MARK: VARS
+
+    // This array holds the generated Tiles.
     public ColorTile[] generatedColorTiles;
+
+    // Needed for properly generating interpolated colors.
     private final int columnLength;
     private final int rowLength;
 
+    // There are always 4 Colors needed to generate a Tile set for a rectangular game background.
+    // These colors are located in the corners.
     public ColorTile upperLeftTile;
     public ColorTile upperRightTile;
     public ColorTile lowerLeftTile;
     public ColorTile lowerRightTile;
 
-    public Color UPPER_LEFT;
-    public Color UPPER_RIGHT;
-    public Color LOWER_LEFT;
-    public Color LOWER_RIGHT;
 
-
+    // MARK: CONSTRUCTORS
     public ColorTileGenerator (ColorTile upperLeftTile, ColorTile upperRightTile,
                                ColorTile lowerLeftTile, ColorTile lowerRightTile,
                                int columnLength, int rowLength) {
@@ -53,6 +54,10 @@ public class ColorTileGenerator {
     }
 
 
+    // MARK: HELPER FUNCTIONS
+
+    // Creates a new ColorTile through the interpolated colors of two ColorTiles
+    // with a specific weight.
     public ColorTile interpolateColor (ColorTile start, ColorTile end, float weight) {
 
         Color startCol = start.getRealColor();
@@ -67,7 +72,7 @@ public class ColorTileGenerator {
         return middleTile;
     }
 
-
+    // Generates ColorTiles for one row. (first and last ColorTile in the row are given.)
     public void generateColorRow (ColorTile leftColorTile, ColorTile rightColorTile, int startIndex) {
         float standardWeight = 1 / ((float) (columnLength));
 
@@ -79,6 +84,7 @@ public class ColorTileGenerator {
 
     }
 
+    // Generates ColorTiles for one column. (top and bottom ColorTile in column is given.)
     public void generateColorColumn (ColorTile topColorTile, ColorTile bottomColorTile, int startIndex) {
         float standardWeight = 1 / ((float) (rowLength));
 
@@ -89,6 +95,7 @@ public class ColorTileGenerator {
         }
     }
 
+    // Generates the game field based on the respective corner colors.
     public void generateColorTiles () {
 
         // First generate first and last column

@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         generator.generateColorTiles();
 
-        gridView.setAdapter(new TileAdapter(this, generator.generatedColors));
+        gridView.setAdapter(new TileAdapter(this, generator.generatedColorTiles));
         gridView.setNumColumns(5);
 
 

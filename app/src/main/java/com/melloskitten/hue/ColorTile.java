@@ -72,4 +72,9 @@ public class ColorTile {
         return isHint && isLocked;
     }
 
+    // Checks if a ColorTile is in the right position to be solved.
+    public boolean isSolved() {
+        return realColor == curColor;
+    }
+
 }

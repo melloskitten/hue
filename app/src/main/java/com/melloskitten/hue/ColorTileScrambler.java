@@ -16,6 +16,7 @@ import java.util.Random;
  */
 
 // This class takes a given ColorTile array and scrambles it up, respecting Hints.
+// Also, during the shuffling process not the actual ColorTile is scrambled but only the curColor
 // (Hints are fixed and should not be shuffled to make the game easier for the player.)
 public class ColorTileScrambler {
 
@@ -32,7 +33,8 @@ public class ColorTileScrambler {
             if (colorTiles[i].isHint()) {
                 result[i] = colorTiles[i];
             } else {
-                temp.add(colorTiles[i]);
+                result[i] = colorTiles[i];
+                temp.add(colorTiles[i].getCurColor());
             }
         }
 
@@ -44,8 +46,9 @@ public class ColorTileScrambler {
         // into one result array
 
         for (int j = 0; j < result.length; j++) {
-            if (result[j] == null) {
-                result[j] = (ColorTile) temp.remove(0);
+
+            if (!result[j].isHint()) {
+                result[j].setCurColor((Color) temp.remove(0));
             }
         }
 

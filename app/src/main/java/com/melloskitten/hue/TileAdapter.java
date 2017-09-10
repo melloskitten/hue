@@ -85,15 +85,26 @@ public class TileAdapter extends BaseAdapter {
         tileView.setBackgroundColor(Color.rgb(color.red(), color.green(), color.blue()));
     }
 
-    // Swap method for changing two Tiles
+    // Swap method for changing two tile's current colors.
     public void swap(int oldPos, int newPos) {
 
-        ColorTile temp = colorTiles[oldPos];
-        colorTiles[oldPos] = colorTiles[newPos];
-        colorTiles[newPos] = temp;
+        Color temp = colorTiles[oldPos].getCurColor();
+        colorTiles[oldPos].setCurColor(colorTiles[newPos].getCurColor());
+        colorTiles[newPos].setCurColor(temp);
 
         this.notifyDataSetChanged();
 
+    }
+
+    // Checks if the puzzle is solved yet.
+    public boolean isPuzzleSolved() {
+
+        for (int i = 0; i < colorTiles.length; i++) {
+            if (!colorTiles[i].isSolved()) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }

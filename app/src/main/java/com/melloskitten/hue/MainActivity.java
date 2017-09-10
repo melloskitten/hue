@@ -60,6 +60,12 @@ public class MainActivity extends AppCompatActivity {
 
                                                     View.DragShadowBuilder myShadow = new View.DragShadowBuilder(tileView);
 
+                                                    ColorTile colorTile = (ColorTile) gridView.getAdapter().getItem(oldPos);
+
+                                                    if (colorTile.isHint()) {
+                                                    return false;
+                                                }
+
                                                     tileView.startDrag(null, myShadow, null, 0);
 
                                             }
@@ -97,6 +103,13 @@ public class MainActivity extends AppCompatActivity {
                             case DragEvent.ACTION_DROP:
                                 newX = (int) dragEvent.getX();
                                 newY = (int) dragEvent.getY();
+
+                                int pos = gridView.pointToPosition(newX, newY);
+                                ColorTile colorTile = (ColorTile) gridView.getAdapter().getItem(pos);
+                                if (colorTile.isHint()) {
+                                    return false;
+                                }
+
                                 return true;
 
                             case DragEvent.ACTION_DRAG_ENDED:
@@ -110,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
                                     int index = gridView.pointToPosition(newX, newY);
 
                                     TileAdapter tileAdapter = (TileAdapter) gridView.getAdapter();
+
                                     tileAdapter.swap(index, oldPos);
 
 

@@ -71,6 +71,7 @@ public class TileAdapter extends BaseAdapter {
 
     // Swap method for changing two Tiles
     public void swap(int oldPos, int newPos) {
+
         ColorTile temp = colorTiles[oldPos];
         colorTiles[oldPos] = colorTiles[newPos];
         colorTiles[newPos] = temp;

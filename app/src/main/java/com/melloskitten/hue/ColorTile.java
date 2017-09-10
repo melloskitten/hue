@@ -37,6 +37,7 @@ public class ColorTile {
 
     public void setHint(boolean hint) {
         isHint = hint;
+        isLocked = hint;
     }
 
     public void setLocked(boolean locked) {
@@ -56,6 +57,7 @@ public class ColorTile {
     }
 
     public boolean isHint() {
-        return isHint;
+        return isHint && isLocked;
     }
+
 }

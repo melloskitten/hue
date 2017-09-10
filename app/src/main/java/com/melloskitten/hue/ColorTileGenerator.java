@@ -96,6 +96,7 @@ public class ColorTileGenerator {
     }
 
     // Generates the game field based on the respective corner colors.
+    // Also adds in the specified Hint ColorTiles (if there are any)
     public void generateColorTiles () {
 
         // First generate first and last column
@@ -109,7 +110,22 @@ public class ColorTileGenerator {
             ColorTile rightColorTile = generatedColorTiles[i * columnLength + (columnLength-1)];
             generateColorRow(leftColorTile, rightColorTile, i * columnLength);
         }
+        setHintTiles();
     }
+
+
+    // FIXME: For now, the hinted ColorTiles are always going to be in the corners. (SEMI HARD)
+    // Locks ColorTiles and makes hints that are supposed to help the user and make the game easier.
+    public void setHintTiles() {
+
+        generatedColorTiles[0].setHint(true);
+        generatedColorTiles[columnLength-1].setHint(true);
+
+        generatedColorTiles[generatedColorTiles.length-1].setHint(true);
+        generatedColorTiles[generatedColorTiles.length - rowLength - 2].setHint(true);
+
+    }
+
 
 
 }

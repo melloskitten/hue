@@ -57,6 +57,12 @@ public class TileAdapter extends BaseAdapter {
         Color curCol = curTile.getCurColor();
         tileView.setBackgroundColor(Color.rgb(curCol.red(), curCol.green(), curCol.blue()));
 
+        if (curTile.isHint()) {
+            // just display it black or smth
+            tileView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            tileView.setText("X");
+        }
+
         // FIXME: Fix this standardized height
         int maxHeight = colorTiles.length / 5;
         tileView.setHeight(viewGroup.getHeight()/maxHeight);
@@ -70,7 +76,6 @@ public class TileAdapter extends BaseAdapter {
         colorTiles[newPos] = temp;
 
         this.notifyDataSetChanged();
-
 
     }
 

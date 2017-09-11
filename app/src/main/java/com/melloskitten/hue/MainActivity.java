@@ -47,10 +47,6 @@ public class MainActivity extends AppCompatActivity {
         gridView.setAdapter(new TileAdapter(this, generatedColorTiles, 5));
         gridView.setNumColumns(5);
 
-        TileAdapter adapter = (TileAdapter) gridView.getAdapter();
-        boolean a = adapter.isPuzzleSolved();
-
-
 
         gridView.setOnTouchListener(new View.OnTouchListener() {
                                         @Override

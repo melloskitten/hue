@@ -4,6 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.melloskitten.hue.MainMenu">
+    tools:context="com.melloskitten.hue.MainMenu"
+    android:background="@drawable/main_menu_gradient">
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="132dp"
+        android:layout_height="57dp"
+        android:text="TextView"
+        tools:layout_editor_absoluteY="34dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 </android.support.constraint.ConstraintLayout>

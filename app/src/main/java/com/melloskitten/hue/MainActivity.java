@@ -2,6 +2,7 @@ package com.melloskitten.hue;
 
 import android.graphics.Color;
 import android.graphics.Interpolator;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +31,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        // SNIPPET HOW TO CHANGE THE FONTS
+        TextView txt = (TextView) findViewById(R.id.level_header);
+        Typeface font = Typeface.createFromAsset(getAssets(), "roboto-light.ttf");
+        txt.setTypeface(font);
 
         final GridView gridView = (GridView) findViewById(R.id.gridView);
 

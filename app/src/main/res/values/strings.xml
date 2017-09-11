@@ -23,4 +23,7 @@
     <string name="lvl_2_col4">#c1666b</string>
 
     <integer name="lvl_2_max_turns">10</integer>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

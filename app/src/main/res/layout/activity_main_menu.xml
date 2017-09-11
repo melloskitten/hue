@@ -4,15 +4,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.melloskitten.hue.MainMenu"
+    tools:context="com.melloskitten.hue.MainMenuActivity"
     android:background="@drawable/main_menu_gradient">
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="132dp"
-        android:layout_height="57dp"
-        android:text="TextView"
-        tools:layout_editor_absoluteY="34dp"
+        android:id="@+id/main_menu_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="43dp"
+        android:text="Hue"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="40sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
+
+    <Button
+        android:id="@+id/main_menu_start_game"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="55dp"
+        android:background="@drawable/rectangle"
+        android:text="Start Game"
+        android:textAllCaps="false"
+        android:textColor="#f05967"
+        android:textSize="18sp"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_menu_header" />
+
+    <Button
+        android:id="@+id/main_menu_about_us"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/rectangle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_menu_how_to"
+        android:text="About"
+        android:textAllCaps="false"
+        android:textColor="#f05967"
+        android:textSize="18sp" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:background="@drawable/rectangle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="36dp"
+        app:layout_constraintTop_toBottomOf="@+id/main_menu_start_game"
+        android:id="@+id/main_menu_how_to"
+        android:text="How To"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textColor="#f05967" />
+
+
 </android.support.constraint.ConstraintLayout>

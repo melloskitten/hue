@@ -30,11 +30,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        // SNIPPET HOW TO CHANGE THE FONTS
-        TextView txt = (TextView) findViewById(R.id.level_header);
-        Typeface font = Typeface.createFromAsset(getAssets(), "roboto-light.ttf");
-        txt.setTypeface(font);
-
         final GridView gridView = (GridView) findViewById(R.id.gridView);
 
 

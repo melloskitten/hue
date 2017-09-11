@@ -19,11 +19,25 @@ public class MenuCollectionActivity extends FragmentActivity {
                 getSupportFragmentManager()
         );
 
+
         viewPager = (ViewPager) findViewById(R.id.pager);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabDots);
         tabLayout.setupWithViewPager(viewPager, true);
         viewPager.setAdapter(pagerAdapter);
 
+        // FIXME: For intents
+        //@Override
+        //protected void onCreate(Bundle savedInstanceState) {
+        //    Intent intent = getIntent();
+        //    String value = intent.getStringExtra("key"); //if it's a string you stored.
+        //}
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 }
 

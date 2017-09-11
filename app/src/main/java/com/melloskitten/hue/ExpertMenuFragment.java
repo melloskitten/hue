@@ -1,11 +1,13 @@
 package com.melloskitten.hue;
 
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 public class ExpertMenuFragment extends Fragment {
@@ -13,7 +15,14 @@ public class ExpertMenuFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_expert_menu, container, false);
+
+
+        View view = inflater.inflate(R.layout.activity_expert_menu, container, false);
+        TextView textView = (TextView) view.findViewById(R.id.expert_menu_header);
+        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "roboto-thin.ttf");
+        textView.setTypeface(font);
+
+        return view;
     }
 
     @Override

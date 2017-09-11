@@ -16,7 +16,8 @@
         <activity
             android:name=".MainMenu"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".MenuCollectionActivity">
+        <activity android:name=".MenuCollectionActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -39,12 +39,13 @@
     <!-- Level 3 Assets -->
     <string name="easy_lvl_3_name">Rainbow</string>
 
-    <string name="easy_lvl_3_col1">#1c77c3</string>
-    <string name="easy_lvl_3_col2">#39a9db</string>
-    <string name="easy_lvl_3_col3">#f39237</string>
-    <string name="easy_lvl_3_col4">#d63230</string>
+    <string name="easy_lvl_3_col1">#462255</string>
+    <string name="easy_lvl_3_col2">#aa4465</string>
+    <string name="easy_lvl_3_col3">#ffa69e</string>
+    <string name="easy_lvl_3_col4">#93e1d8</string>
 
     <integer name="easy_lvl_3_max_turns">10</integer>
+
 
 
 

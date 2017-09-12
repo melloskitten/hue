@@ -90,7 +90,7 @@ public class ColorTileGenerator {
 
     // Generates ColorTiles for one row. (first and last ColorTile in the row are given.)
     public void generateColorRow (ColorTile leftColorTile, ColorTile rightColorTile, int startIndex) {
-        float standardWeight = 1 / ((float) (columnLength));
+        float standardWeight = 1 / ((float) (columnLength-1));
 
         for (int i = 0; i < columnLength; i++) {
             float weight = i * standardWeight;
@@ -102,7 +102,7 @@ public class ColorTileGenerator {
 
     // Generates ColorTiles for one column. (top and bottom ColorTile in column is given.)
     public void generateColorColumn (ColorTile topColorTile, ColorTile bottomColorTile, int startIndex) {
-        float standardWeight = 1 / ((float) (rowLength));
+        float standardWeight = 1 / ((float) (rowLength-1));
 
         for (int i = 0; i < (rowLength); i++) {
             float weight = i * standardWeight;
@@ -119,9 +119,10 @@ public class ColorTileGenerator {
         generateColorColumn(upperLeftTile, lowerLeftTile, 0);
         generateColorColumn(upperRightTile, lowerRightTile, columnLength-1);
 
+
+
         // Generate the missing rows
         for (int i = 0; i < rowLength; i++) {
-
             ColorTile leftColorTile = generatedColorTiles[i * columnLength];
             ColorTile rightColorTile = generatedColorTiles[i * columnLength + (columnLength-1)];
             generateColorRow(leftColorTile, rightColorTile, i * columnLength);

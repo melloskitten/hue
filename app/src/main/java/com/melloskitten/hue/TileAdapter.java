@@ -38,6 +38,9 @@ public class TileAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
+        if (colorTiles[i] == null) {
+            return new ColorTile(Color.valueOf(0,0,0), Color.valueOf(0,0,0), false, false);
+        }
         return colorTiles[i];
     }
 
@@ -76,6 +79,7 @@ public class TileAdapter extends BaseAdapter {
     private void setViewForTile(Color color, TextView tileView, ColorTile curTile) {
 
         // FIXME: Make Hint Tiles more prominent, e.g. with circle on them or smth.
+
         if (curTile.isHint() && curTile != null) {
             tileView.setText("X");
             tileView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);

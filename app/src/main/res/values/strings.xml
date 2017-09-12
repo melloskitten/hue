@@ -5,13 +5,16 @@
     <string name="level_descr">Level</string>
 
 
-
-
     <!-- Main Menu Assets -->
-    <string name="how_to_desc">The quick fox jumps over the lazy dog The quick fox jumps over
-        the lazy dog The quick fox jumps over the lazy dog The quick fox jumps over the lazy dog
-        The quick fox jumps over the lazy dog The quick fox jumps over the lazy dog The quick fox
-        jumps over the lazy dog </string>
+    <string name="how_to_desc">Place the colo tiles to generate a smooth gradient. Some color tiles
+        cannot be moved, use them as hints for further progression. Try to stay under the maximum of
+        color tile swaps for a level.
+        Have fun!
+    </string>
+
+    <string name="about_desc">Hue is heavily inspired by the iOS application "I love Hue".
+    Please check it out, it\'s an awesome game. I made this game as a starter project to get into
+    Android programming, please bear with potential bugs.</string>
 
     <!-- EASY DIFFICULTY ASSETS -->
     <!-- Level 1 Assets -->
@@ -37,7 +40,7 @@
 
 
     <!-- Level 3 Assets -->
-    <string name="easy_lvl_3_name">Rainbow</string>
+    <string name="easy_lvl_3_name">Heart</string>
 
     <string name="easy_lvl_3_col1">#462255</string>
     <string name="easy_lvl_3_col2">#aa4465</string>
@@ -47,9 +50,37 @@
     <integer name="easy_lvl_3_max_turns">10</integer>
 
 
+    <!-- INTERMEDIATE DIFFICULTY ASSETS -->
+    <!-- Level 1 Assets -->
+    <string name="intermediate_lvl_1_name">Sea</string>
+
+    <string name="intermediate_lvl_1_col1">#2c2a4a</string>
+    <string name="intermediate_lvl_1_col2">#4f518c</string>
+    <string name="intermediate_lvl_1_col3">#7fdeff</string>
+    <string name="intermediate_lvl_1_col4">#dabfff</string>
+
+    <integer name="intermediate_lvl_1_max_turns">10</integer>
 
 
+    <!-- Level 2 Assets -->
+    <string name="intermediate_lvl_2_name">Turtle</string>
 
+    <string name="intermediate_lvl_2_col1">#140d4f</string>
+    <string name="intermediate_lvl_2_col2">#4ea699</string>
+    <string name="intermediate_lvl_2_col3">#2dd881</string>
+    <string name="intermediate_lvl_2_col4">#6fedb7</string>
+
+    <integer name="intermediate_lvl_2_max_turns">10</integer>
+
+    <!-- Level 3 Assets -->
+    <string name="intermediate_lvl_3_name">Froggie</string>
+
+    <string name="intermediate_lvl_3_col1">#033f63</string>
+    <string name="intermediate_lvl_3_col2">#b5b682</string>
+    <string name="intermediate_lvl_3_col3">#fedc97</string>
+    <string name="intermediate_lvl_3_col4">#28666e</string>
+
+    <integer name="intermediate_lvl_3_max_turns">10</integer>
 
 
     <!-- EXPERT DIFFICULTY ASSETS -->

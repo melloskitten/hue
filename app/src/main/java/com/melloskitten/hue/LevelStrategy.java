@@ -29,11 +29,14 @@ class EasyLevelStrategy extends LevelStrategy {
     }
 }
 
+// Easy Levels are at most 5*6 big.
 class IntermediateLevelStrategy extends LevelStrategy {
 
 
     public IntermediateLevelStrategy(String[] hexCodes) {
         super(hexCodes);
+        this.columnLength = 5;
+        this.rowLength = 6;
     }
 }
 

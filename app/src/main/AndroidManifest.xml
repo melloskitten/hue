@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".GameActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".MainMenuActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
@@ -23,13 +23,12 @@
         </activity>
         <activity
             android:name=".MenuCollectionActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-        </activity>
-        <activity android:name=".HowToActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-
-
-        </activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+        <activity
+            android:name=".HowToActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+        <activity android:name=".AboutActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
     </application>
 
 </manifest>

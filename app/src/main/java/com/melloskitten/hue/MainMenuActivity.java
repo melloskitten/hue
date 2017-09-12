@@ -47,5 +47,15 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
 
+        about.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainMenuActivity.this, AboutActivity.class);
+                MainMenuActivity.this.startActivity(intent);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
+        });
+
     }
 }

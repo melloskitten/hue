@@ -1,7 +1,6 @@
 package com.melloskitten.hue;
 
-import android.graphics.Color;
-import android.graphics.Typeface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.DragEvent;
@@ -12,35 +11,46 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity {
 
-    public static TileAdapter tileAdapter;
+
+    // MARK: VARS
+    private static TileAdapter tileAdapter;
+    private static ColorTileGenerator tileGenerator;
+    private String[] hexCodes;
+    private int rowLength;
+    private int columnLength;
+
+
+
     public static int newX = 0;
     public static int newY = 0;
     public static int oldPos = 0;
 
-    Color COL_1 = Color.valueOf(Color.parseColor("#555b6e"));
-    Color COL_2 = Color.valueOf(Color.parseColor("#ffd6ba"));
-    Color COL_3 = Color.valueOf(Color.parseColor("#89b0ae"));
-    Color COL_4 = Color.valueOf(Color.parseColor("#bee3db"));
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_game);
+
+
+        // Set all needed parameters
+        setParamsForColGeneration();
+
 
 
         final GridView gridView = (GridView) findViewById(R.id.gridView);
 
 
-        COL_1 = ColorWrapper.prsCol(getString(R.string.lvl_2_col1));
+        tileGenerator = new ColorTileGenerator(hexCodes[0], hexCodes[1], hexCodes[2], hexCodes[3], 5,3);
 
-        ColorTileGenerator generator = new ColorTileGenerator(COL_1, COL_2, COL_3, COL_4, 5,3);
+        //ColorTileGenerator generator = new ColorTileGenerator(COL_1, COL_2, COL_3, COL_4, 5,3);
 
 
 
-        generator.generateColorTiles();
-        ColorTile[] generatedColorTiles = generator.generatedColorTiles;
+        tileGenerator.generateColorTiles();
+        ColorTile[] generatedColorTiles = tileGenerator.generatedColorTiles;
         generatedColorTiles = ColorTileScrambler.scramble(generatedColorTiles);
 
         gridView.setAdapter(new TileAdapter(this, generatedColorTiles, 5));
@@ -146,6 +156,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    private void setParamsForColGeneration() {
+        Intent intent = getIntent();
+        hexCodes = intent.getStringArrayExtra("hexCodes");
+        rowLength = intent.getIntExtra("rowLength", 0);
+        columnLength = intent.getIntExtra("columnLength", 0);
     }
 
 

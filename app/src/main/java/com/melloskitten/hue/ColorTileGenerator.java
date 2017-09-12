@@ -51,6 +51,25 @@ public class ColorTileGenerator {
         this.generatedColorTiles = new ColorTile[rowLength*columnLength];
     }
 
+    public ColorTileGenerator(String upper_left, String upper_right,
+                              String lower_left, String lower_right,
+                              int columnLength, int rowLength) {
+
+        Color UPPER_LEFT = ColorWrapper.prsCol(upper_left);
+        Color UPPER_RIGHT = ColorWrapper.prsCol(upper_right);
+        Color LOWER_LEFT = ColorWrapper.prsCol(lower_left);
+        Color LOWER_RIGHT = ColorWrapper.prsCol(lower_right);
+
+        this.upperLeftTile = new ColorTile(UPPER_LEFT, UPPER_LEFT, false, false);
+        this.upperRightTile = new ColorTile(UPPER_RIGHT, UPPER_RIGHT, false, false);
+        this.lowerLeftTile = new ColorTile(LOWER_LEFT, LOWER_LEFT, false, false);
+        this.lowerRightTile = new ColorTile(LOWER_RIGHT, LOWER_RIGHT, false, false);
+        this.rowLength = rowLength;
+        this.columnLength = columnLength;
+        this.generatedColorTiles = new ColorTile[rowLength*columnLength];
+
+    }
+
 
     // MARK: HELPER FUNCTIONS
     // Creates a new ColorTile through the interpolated colors of two ColorTiles

@@ -8,25 +8,18 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class GameActivity extends AppCompatActivity {
 
 
     // MARK: VARS
-    private static TileAdapter tileAdapter;
-    private static ColorTileGenerator tileGenerator;
     private String[] hexCodes;
     private int rowLength;
     private int columnLength;
-
-
-
-    public static int newX = 0;
-    public static int newY = 0;
     public static int oldPos = 0;
-
+    public static int newPos = 0;
+    GridView gridView;
 
 
     @Override
@@ -35,129 +28,26 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
 
-        // Set all needed parameters
+        // Set all needed parameters for generating the game field.
         setParamsForColGeneration();
 
+        // Create the game field with given params.
+        ColorTile[] generatedColorTiles = ColorTileFactory.getGameColorTiles(hexCodes,
+                columnLength, rowLength);
 
 
-        final GridView gridView = (GridView) findViewById(R.id.gridView);
+        // Set adapter and init gridView.
+        gridView = setUpGridView(generatedColorTiles);
 
 
-        tileGenerator = new ColorTileGenerator(hexCodes[0], hexCodes[1], hexCodes[2], hexCodes[3], 5,3);
+        // Init the onTouch Listener for starting to drag around the tile.
+        gridView.setOnTouchListener(new CustomOnTouchListener(oldPos, gridView));
 
-        //ColorTileGenerator generator = new ColorTileGenerator(COL_1, COL_2, COL_3, COL_4, 5,3);
-
-
-
-        tileGenerator.generateColorTiles();
-        ColorTile[] generatedColorTiles = tileGenerator.generatedColorTiles;
-        generatedColorTiles = ColorTileScrambler.scramble(generatedColorTiles);
-
-        gridView.setAdapter(new TileAdapter(this, generatedColorTiles, 5));
-        gridView.setNumColumns(5);
-
-
-        gridView.setOnTouchListener(new View.OnTouchListener() {
-                                        @Override
-                                        public boolean onTouch(View view, MotionEvent motionEvent) {
-
-                                            switch (motionEvent.getAction()){
-                                                case MotionEvent.ACTION_DOWN:
-                                                    int x = (int) motionEvent.getX();
-                                                    int y = (int) motionEvent.getY();
-                                                    oldPos = gridView.pointToPosition(x,y);
-                                                    View tileView = gridView.getChildAt(oldPos);
-
-
-                                                    View.DragShadowBuilder myShadow = new View.DragShadowBuilder(tileView);
-
-                                                    ColorTile colorTile = (ColorTile) gridView.getAdapter().getItem(oldPos);
-
-                                                    if (colorTile.isHint()) {
-                                                    return false;
-                                                }
-
-                                                    tileView.startDrag(null, myShadow, null, 0);
-
-                                            }
-
-
-
-                                            return false;
-                                        }
-                                    });
-
-
-                gridView.setOnDragListener(new AdapterView.OnDragListener() {
-                    @Override
-                    public boolean onDrag(View view, DragEvent dragEvent) {
-
-                        final int action = dragEvent.getAction();
-
-                        // Handles each of the expected events:
-                        switch (action) {
-                            case DragEvent.ACTION_DRAG_STARTED:
-
-                                int oldX = (int) dragEvent.getX();
-                                int oldY = (int) dragEvent.getY();
-
-                                oldPos = gridView.pointToPosition(oldX, oldY);
-
-                                return true;
-
-                            case DragEvent.ACTION_DRAG_ENTERED:
-                                return true;
-
-                            case DragEvent.ACTION_DRAG_LOCATION:
-                                return true;
-
-                            case DragEvent.ACTION_DROP:
-                                newX = (int) dragEvent.getX();
-                                newY = (int) dragEvent.getY();
-
-                                int pos = gridView.pointToPosition(newX, newY);
-                                ColorTile colorTile = (ColorTile) gridView.getAdapter().getItem(pos);
-                                if (colorTile.isHint()) {
-                                    return false;
-                                }
-
-                                return true;
-
-                            case DragEvent.ACTION_DRAG_ENDED:
-                                // Does a getResult(), and displays what happened.
-                                if (dragEvent.getResult()) {
-
-                                    int position = gridView.pointToPosition(newX, newY);
-
-                                    GridView gridView = (GridView) view;
-                                    TextView textView = (TextView) gridView.getChildAt(position);
-                                    int index = gridView.pointToPosition(newX, newY);
-
-                                    TileAdapter tileAdapter = (TileAdapter) gridView.getAdapter();
-
-                                    tileAdapter.swap(index, oldPos);
-
-
-                                    if (tileAdapter.isPuzzleSolved()) {
-                                        Toast.makeText(view.getContext(),
-                                                "The game is finished!", Toast.LENGTH_SHORT).show();
-                                    }
-
-
-                                } else {
-
-                                }
-
-                                return true;
-
-
-                        }
-                        return false;
-                    }
-                });
-
+        // Init the onDrag Listener for dropping the tile.
+        gridView.setOnDragListener(new CustomOnDragListener(oldPos, newPos, gridView));
     }
 
+    // MARK: Helper Methods.
     private void setParamsForColGeneration() {
         Intent intent = getIntent();
         hexCodes = intent.getStringArrayExtra("hexCodes");
@@ -165,11 +55,114 @@ public class GameActivity extends AppCompatActivity {
         columnLength = intent.getIntExtra("columnLength", 0);
     }
 
+    private GridView setUpGridView(ColorTile[] generatedColorTiles) {
+        GridView gridView = (GridView) findViewById(R.id.gridView);
+        gridView.setAdapter(new TileAdapter(this, generatedColorTiles, columnLength));
+        gridView.setNumColumns(columnLength);
+        return gridView;
+    }
 
-    public void swap(int pos) {
-
-        TileAdapter updater = tileAdapter;
+}
 
 
+// MARK: Modified onTouch Listener for the GridView.
+class CustomOnTouchListener implements View.OnTouchListener {
+
+    // MARK: VARS
+    int oldPos;
+    GridView gridView;
+
+    // MARK: CONSTRUCTOR
+    public CustomOnTouchListener(int oldPos, GridView gridView) {
+        this.oldPos = oldPos;
+        this.gridView = gridView;
+    }
+
+    // MARK: ONTOUCH METHODS
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+
+        switch (motionEvent.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                int x = (int) motionEvent.getX();
+                int y = (int) motionEvent.getY();
+                oldPos = gridView.pointToPosition(x, y);
+
+                View tileView = gridView.getChildAt(oldPos);
+                View.DragShadowBuilder myShadow = new View.DragShadowBuilder(tileView);
+
+                ColorTile colorTile = (ColorTile) gridView.getAdapter().getItem(oldPos);
+
+                if (colorTile.isHint()) {
+                    return false;
+                }
+
+                tileView.startDrag(null, myShadow, null, 0);
+        }
+        return false;
+    }
+}
+
+// MARK: Modified OnDrag Listener for the GridView.
+class CustomOnDragListener implements AdapterView.OnDragListener {
+
+    // MARK: VARS
+    int oldPos;
+    int newPos;
+    GridView gridView;
+
+    // MARK: CONSTRUCTOR
+    public CustomOnDragListener(int oldPos, int newPos, GridView gridView) {
+        this.oldPos = oldPos;
+        this.newPos = newPos;
+        this.gridView = gridView;
+    }
+
+    // MARK: ONDRAG METHODS
+    @Override
+    public boolean onDrag(View view, DragEvent dragEvent) {
+
+        final int action = dragEvent.getAction();
+
+        switch (action) {
+            case DragEvent.ACTION_DRAG_STARTED:
+
+                int oldX = (int) dragEvent.getX();
+                int oldY = (int) dragEvent.getY();
+
+                oldPos = gridView.pointToPosition(oldX, oldY);
+                return true;
+
+            case DragEvent.ACTION_DROP:
+
+                int newX = (int) dragEvent.getX();
+                int newY = (int) dragEvent.getY();
+
+                newPos = gridView.pointToPosition(newX, newY);
+                ColorTile colorTile = (ColorTile) gridView.getAdapter().getItem(newPos);
+
+                if (colorTile.isHint()) {
+                    return false;
+                }
+
+                return true;
+
+            case DragEvent.ACTION_DRAG_ENDED:
+
+                if (dragEvent.getResult()) {
+
+                    TileAdapter tileAdapter = (TileAdapter) gridView.getAdapter();
+                    tileAdapter.swap(newPos, oldPos);
+
+
+                    // FIXME: Proper game ending.
+                    if (tileAdapter.isPuzzleSolved()) {
+                        Toast.makeText(view.getContext(),
+                                "The game is finished!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                return true;
+        }
+        return false;
     }
 }

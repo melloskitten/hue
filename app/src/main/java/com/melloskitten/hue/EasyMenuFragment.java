@@ -43,7 +43,7 @@ public class EasyMenuFragment extends Fragment {
 
                 intent.putExtra("hexCodes", hexCodes);
                 intent.putExtra("rowLength", 3);
-                intent.putExtra("columnLength", 5);
+                intent.putExtra("columnLength", 6);
 
                 EasyMenuFragment.this.startActivity(intent);
                 getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);

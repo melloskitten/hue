@@ -6,13 +6,18 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 // Adapter for the ViewPager including the different difficulty screens.
 public class MenuCollectionPagerAdapter extends FragmentStatePagerAdapter {
+
+    // MARK: VARS
     Fragment[] fragments;
 
+
+    // MARK: CONSTRUCTOR
     public MenuCollectionPagerAdapter(FragmentManager fm, Fragment[] fragments) {
         super(fm);
         this.fragments = fragments;
     }
 
+    // MARK: VIEWPAGER OVERRIDE METHODS
     @Override
     public Fragment getItem(int i) {
         return fragments[i];

@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+// Activity that holds the About screen information.
 public class AboutActivity extends AppCompatActivity {
 
     @Override
@@ -12,6 +13,10 @@ public class AboutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
+        setUp();
+    }
+
+    private void setUp() {
         TextView how_to_desc = (TextView) findViewById(R.id.about_desc);
         TextView how_to_header = (TextView) findViewById(R.id.about_header);
         Typeface font = Typeface.createFromAsset(getAssets(), "roboto-thin.ttf");

@@ -11,8 +11,8 @@ public class ColorTileFactory {
                                                 int hintMode) {
 
         ColorTileGenerator tileGenerator = new ColorTileGenerator(hexCodes[0], hexCodes[1],
-                                                                hexCodes[2], hexCodes[3],
-                                                                columnLength, rowLength, hintMode);
+                hexCodes[2], hexCodes[3],
+                columnLength, rowLength, hintMode);
 
         ColorTile[] generatedColorTiles = tileGenerator.generateColorTiles();
 

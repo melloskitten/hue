@@ -21,14 +21,14 @@ public class ColorTile {
 
 
     // MARK: CONSTRUCTORS
-    public ColorTile (Color realColor, Color curColor, boolean isLocked, boolean isHint) {
+    public ColorTile(Color realColor, Color curColor, boolean isLocked, boolean isHint) {
         this.realColor = realColor;
         this.curColor = curColor;
         this.isLocked = isLocked;
         this.isHint = isHint;
     }
 
-    public ColorTile (Color generatedColor) {
+    public ColorTile(Color generatedColor) {
         this.realColor = generatedColor;
         this.curColor = generatedColor;
         this.isLocked = false;

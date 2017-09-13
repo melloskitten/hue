@@ -76,8 +76,14 @@ public class CustomOnDragListener implements AdapterView.OnDragListener {
         return false;
     }
 
+
+    // MARK: HELPER METHODS
+    // Shows the AlertDialog when the user has successfully solved a level and navigates
+    // them back to the Menu Screen.
     private void showFinishedGamePrompt(View view) {
+
         final AlertDialog.Builder builder;
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             builder = new AlertDialog.Builder(view.getContext(), android.R.style.Theme_Material_Dialog_Alert);
         } else {
@@ -106,7 +112,11 @@ public class CustomOnDragListener implements AdapterView.OnDragListener {
                 .show();
     }
 
-    public static Activity getActivity() throws ClassNotFoundException, NoSuchMethodException, NoSuchFieldException, IllegalAccessException, InvocationTargetException {
+    // Code Snippet taken from https://stackoverflow.com/a/28423385/7217195 for getting the
+    // Activity ... needed for finishing the activity and navigating to the Main Menu.
+    public static Activity getActivity() throws ClassNotFoundException, NoSuchMethodException,
+            NoSuchFieldException, IllegalAccessException, InvocationTargetException {
+
         Class activityThreadClass = Class.forName("android.app.ActivityThread");
         Object activityThread = activityThreadClass.getMethod("currentActivityThread").invoke(null);
         Field activitiesField = activityThreadClass.getDeclaredField("mActivities");
@@ -127,7 +137,6 @@ public class CustomOnDragListener implements AdapterView.OnDragListener {
                 return activity;
             }
         }
-
         return null;
     }
 }

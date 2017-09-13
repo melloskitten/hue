@@ -3,6 +3,7 @@ package com.melloskitten.hue;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,19 +14,15 @@ import android.widget.TextView;
 
 public class ExpertMenuFragment extends Fragment {
 
+    // MARK: ONCREATEVIEW
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
-        View view = inflater.inflate(R.layout.activity_expert_menu, container, false);
-        TextView textView = (TextView) view.findViewById(R.id.expert_menu_header);
-        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "roboto-thin.ttf");
-        textView.setTypeface(font);
-
-        return view;
+        return setUpView(inflater, container);
     }
 
+
+    // MARK: ONACTIVITYCREATED
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -48,6 +45,17 @@ public class ExpertMenuFragment extends Fragment {
         expert_lvl_1.setOnClickListener(new OnClickCreateLevelListener(getActivity(), GameActivity.class, lvl_1_strategy));
         expert_lvl_2.setOnClickListener(new OnClickCreateLevelListener(getActivity(), GameActivity.class, lvl_2_strategy));
         expert_lvl_3.setOnClickListener(new OnClickCreateLevelListener(getActivity(), GameActivity.class, lvl_3_strategy));
+    }
+
+
+    // MARK: HELPER METHODS
+    @NonNull
+    private View setUpView(LayoutInflater inflater, ViewGroup container) {
+        View view = inflater.inflate(R.layout.activity_expert_menu, container, false);
+        TextView textView = (TextView) view.findViewById(R.id.expert_menu_header);
+        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "roboto-thin.ttf");
+        textView.setTypeface(font);
+        return view;
     }
 
 }

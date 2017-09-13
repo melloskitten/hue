@@ -25,7 +25,6 @@ public class ColorTileScrambler {
 
         // Save all Hints and their index in the array
         // Create an ArrayList for easier shuffling of the non Hint tiles
-
         ColorTile[] result = new ColorTile[colorTiles.length];
         ArrayList temp = new ArrayList();
 
@@ -39,12 +38,10 @@ public class ColorTileScrambler {
         }
 
         // Scramble the rest of the array
-
         Collections.shuffle(temp);
 
         // Merge both the isolated Hints and the scrambled ColorTiles
         // into one result array
-
         for (int j = 0; j < result.length; j++) {
 
             if (!result[j].isHint()) {

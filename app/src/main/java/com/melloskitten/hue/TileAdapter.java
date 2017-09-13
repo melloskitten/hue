@@ -22,7 +22,7 @@ public class TileAdapter extends BaseAdapter {
     private int height;
 
 
-    // MARK: Constructor
+    // MARK: CONSTRUCTOR
     public TileAdapter(Context c, ColorTile[] colorTiles, int height) {
         this.mContext = c;
         this.colorTiles = colorTiles;
@@ -30,7 +30,7 @@ public class TileAdapter extends BaseAdapter {
     }
 
 
-    // MARK: Overriden Methods from BaseAdapter
+    // MARK: OVERRIDE METHODS
     @Override
     public int getCount() {
         return colorTiles.length;
@@ -38,9 +38,6 @@ public class TileAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        if (colorTiles[i] == null) {
-            return new ColorTile(Color.valueOf(0,0,0), Color.valueOf(0,0,0), false, false);
-        }
         return colorTiles[i];
     }
 
@@ -55,8 +52,7 @@ public class TileAdapter extends BaseAdapter {
         TextView tileView = new TextView(mContext);
 
         // Set the maximum height for all tiles
-        int maxHeight = colorTiles.length / height;
-        tileView.setHeight(viewGroup.getHeight() / maxHeight);
+        setMaxHeight(viewGroup, tileView);
 
         // In case there are not enough tiles for a level, just fill it default with black.
         if (colorTiles[position] == null) {
@@ -70,10 +66,8 @@ public class TileAdapter extends BaseAdapter {
         // place.
 
         setViewForTile(curTile.getCurColor(), tileView, curTile);
-
         return tileView;
     }
-
 
     // MARK: Helper Methods
     private void setViewForTile(Color color, TextView tileView, ColorTile curTile) {
@@ -110,6 +104,12 @@ public class TileAdapter extends BaseAdapter {
             }
         }
         return true;
+    }
+
+    // Set the maximal height for a color tile.
+    private void setMaxHeight(ViewGroup viewGroup, TextView tileView) {
+        int maxHeight = colorTiles.length / height;
+        tileView.setHeight(viewGroup.getHeight() / maxHeight);
     }
 
 }

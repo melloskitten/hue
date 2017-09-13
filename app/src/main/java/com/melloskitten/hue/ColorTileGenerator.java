@@ -30,16 +30,16 @@ public class ColorTileGenerator {
 
 
     // MARK: CONSTRUCTORS
-    public ColorTileGenerator (ColorTile upperLeftTile, ColorTile upperRightTile,
-                               ColorTile lowerLeftTile, ColorTile lowerRightTile,
-                               int columnLength, int rowLength, int hintMode) {
+    public ColorTileGenerator(ColorTile upperLeftTile, ColorTile upperRightTile,
+                              ColorTile lowerLeftTile, ColorTile lowerRightTile,
+                              int columnLength, int rowLength, int hintMode) {
         this.upperLeftTile = upperLeftTile;
         this.upperRightTile = upperRightTile;
         this.lowerLeftTile = lowerLeftTile;
         this.lowerRightTile = lowerRightTile;
         this.columnLength = columnLength;
         this.rowLength = rowLength;
-        this.generatedColorTiles = new ColorTile[rowLength*columnLength];
+        this.generatedColorTiles = new ColorTile[rowLength * columnLength];
         this.hintMode = hintMode;
     }
 
@@ -53,7 +53,7 @@ public class ColorTileGenerator {
         this.lowerRightTile = new ColorTile(LOWER_RIGHT, LOWER_RIGHT, false, false);
         this.rowLength = rowLength;
         this.columnLength = columnLength;
-        this.generatedColorTiles = new ColorTile[rowLength*columnLength];
+        this.generatedColorTiles = new ColorTile[rowLength * columnLength];
         this.hintMode = hintMode;
     }
 
@@ -72,7 +72,7 @@ public class ColorTileGenerator {
         this.lowerRightTile = new ColorTile(LOWER_RIGHT, LOWER_RIGHT, false, false);
         this.rowLength = rowLength;
         this.columnLength = columnLength;
-        this.generatedColorTiles = new ColorTile[rowLength*columnLength];
+        this.generatedColorTiles = new ColorTile[rowLength * columnLength];
         this.hintMode = hintMode;
 
     }
@@ -81,12 +81,12 @@ public class ColorTileGenerator {
     // MARK: HELPER FUNCTIONS
     // Creates a new ColorTile through the interpolated colors of two ColorTiles
     // with a specific weight.
-    public ColorTile interpolateColor (ColorTile start, ColorTile end, float weight) {
+    public ColorTile interpolateColor(ColorTile start, ColorTile end, float weight) {
 
         Color startCol = start.getRealColor();
         Color endCol = end.getRealColor();
 
-        float red = startCol.red() + (endCol.red()- startCol.red()) * weight;
+        float red = startCol.red() + (endCol.red() - startCol.red()) * weight;
         float green = startCol.green() + (endCol.green() - startCol.green()) * weight;
         float blue = startCol.blue() + (endCol.blue() - startCol.blue()) * weight;
 
@@ -96,8 +96,8 @@ public class ColorTileGenerator {
     }
 
     // Generates ColorTiles for one row. (first and last ColorTile in the row are given.)
-    public void generateColorRow (ColorTile leftColorTile, ColorTile rightColorTile, int startIndex) {
-        float standardWeight = 1 / ((float) (columnLength-1));
+    public void generateColorRow(ColorTile leftColorTile, ColorTile rightColorTile, int startIndex) {
+        float standardWeight = 1 / ((float) (columnLength - 1));
 
         for (int i = 0; i < columnLength; i++) {
             float weight = i * standardWeight;
@@ -108,30 +108,29 @@ public class ColorTileGenerator {
     }
 
     // Generates ColorTiles for one column. (top and bottom ColorTile in column is given.)
-    public void generateColorColumn (ColorTile topColorTile, ColorTile bottomColorTile, int startIndex) {
-        float standardWeight = 1 / ((float) (rowLength-1));
+    public void generateColorColumn(ColorTile topColorTile, ColorTile bottomColorTile, int startIndex) {
+        float standardWeight = 1 / ((float) (rowLength - 1));
 
         for (int i = 0; i < (rowLength); i++) {
             float weight = i * standardWeight;
             ColorTile interpolatedColorTile = interpolateColor(topColorTile, bottomColorTile, weight);
-            generatedColorTiles[(i * columnLength) + startIndex ] = interpolatedColorTile;
+            generatedColorTiles[(i * columnLength) + startIndex] = interpolatedColorTile;
         }
     }
 
     // Generates the game field based on the respective corner colors.
     // Also adds in the specified Hint ColorTiles (if there are any)
-    public ColorTile[] generateColorTiles () {
+    public ColorTile[] generateColorTiles() {
 
         // First generate first and last column
         generateColorColumn(upperLeftTile, lowerLeftTile, 0);
-        generateColorColumn(upperRightTile, lowerRightTile, columnLength-1);
-
+        generateColorColumn(upperRightTile, lowerRightTile, columnLength - 1);
 
 
         // Generate the missing rows
         for (int i = 0; i < rowLength; i++) {
             ColorTile leftColorTile = generatedColorTiles[i * columnLength];
-            ColorTile rightColorTile = generatedColorTiles[i * columnLength + (columnLength-1)];
+            ColorTile rightColorTile = generatedColorTiles[i * columnLength + (columnLength - 1)];
             generateColorRow(leftColorTile, rightColorTile, i * columnLength);
         }
         setHintTiles();
@@ -160,42 +159,28 @@ public class ColorTileGenerator {
 
     // Creates a hint every second tile. Used for harder levels.
     private void generateMod2Hints() {
-        for (int i=0; i < generatedColorTiles.length; i++) {
-            if (i%2==0) {
+        for (int i = 0; i < generatedColorTiles.length; i++) {
+            if (i % 2 == 0) {
                 generatedColorTiles[i].setHint(true);
             }
         }
     }
 
-
     // Generates Hints in the 4 corners of the game field.
     private void generateCornerHints() {
         generatedColorTiles[0].setHint(true);
-        generatedColorTiles[columnLength-1].setHint(true);
-        generatedColorTiles[generatedColorTiles.length-1].setHint(true);
+        generatedColorTiles[columnLength - 1].setHint(true);
+        generatedColorTiles[generatedColorTiles.length - 1].setHint(true);
         generatedColorTiles[generatedColorTiles.length - columnLength].setHint(true);
     }
 
     // Generates hints along the edges of the game field
     private void generateRectangleHints() {
-        for (int i=0; i< generatedColorTiles.length; i++) {
-
-            if (i<columnLength || (generatedColorTiles.length-columnLength <= i) ) {
+        for (int i = 0; i < generatedColorTiles.length; i++) {
+            if (i < columnLength || (generatedColorTiles.length - columnLength <= i)) {
                 generatedColorTiles[i].setHint(true);
             }
-
-
         }
     }
 
-
 }
-
-class HintMode {
-    public static final int EASY = 0;
-    public static final int INTERMEDIATE = 1;
-    public static final int RECTANGLE = 2;
-}
-
-
-

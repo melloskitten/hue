@@ -10,108 +10,86 @@
         cannot be moved, use them as hints for progress.
         Have fun!
     </string>
-
     <string name="about_desc">Hue is heavily inspired by the iOS application <b>"I love Hue"</b>.
     Please check it out, it\'s an awesome game. I made this game as a starter project to get into
     Android programming, please bear with potential bugs.</string>
 
+
     <!-- EASY DIFFICULTY ASSETS -->
     <!-- Level 1 Assets -->
     <string name="easy_lvl_1_name">Pilot</string>
-
     <string name="easy_lvl_1_col1">#555b6e</string>
     <string name="easy_lvl_1_col2">#ffd6ba</string>
     <string name="easy_lvl_1_col3">#89b0ae</string>
     <string name="easy_lvl_1_col4">#bee3db</string>
-
     <integer name="easy_lvl_1_max_turns">10</integer>
-
 
     <!-- Level 2 Assets -->
     <string name="easy_lvl_2_name">Coffe Mug</string>
-
     <string name="easy_lvl_2_col1">#2f2d2e</string>
     <string name="easy_lvl_2_col2">#792359</string>
     <string name="easy_lvl_2_col3">#fd3e81</string>
     <string name="easy_lvl_2_col4">#c1666b</string>
-
     <integer name="easy_lvl_2_max_turns">10</integer>
-
 
     <!-- Level 3 Assets -->
     <string name="easy_lvl_3_name">Heart</string>
-
     <string name="easy_lvl_3_col1">#462255</string>
     <string name="easy_lvl_3_col2">#aa4465</string>
     <string name="easy_lvl_3_col3">#ffa69e</string>
     <string name="easy_lvl_3_col4">#93e1d8</string>
-
     <integer name="easy_lvl_3_max_turns">10</integer>
 
 
     <!-- INTERMEDIATE DIFFICULTY ASSETS -->
     <!-- Level 1 Assets -->
     <string name="intermediate_lvl_1_name">Sea</string>
-
     <string name="intermediate_lvl_1_col1">#2c2a4a</string>
     <string name="intermediate_lvl_1_col2">#4f518c</string>
     <string name="intermediate_lvl_1_col3">#7fdeff</string>
     <string name="intermediate_lvl_1_col4">#dabfff</string>
-
     <integer name="intermediate_lvl_1_max_turns">10</integer>
-
 
     <!-- Level 2 Assets -->
     <string name="intermediate_lvl_2_name">Turtle</string>
-
     <string name="intermediate_lvl_2_col1">#140d4f</string>
     <string name="intermediate_lvl_2_col2">#4ea699</string>
     <string name="intermediate_lvl_2_col3">#2dd881</string>
     <string name="intermediate_lvl_2_col4">#6fedb7</string>
-
     <integer name="intermediate_lvl_2_max_turns">10</integer>
 
     <!-- Level 3 Assets -->
     <string name="intermediate_lvl_3_name">Froggie</string>
-
     <string name="intermediate_lvl_3_col1">#033f63</string>
     <string name="intermediate_lvl_3_col2">#b5b682</string>
     <string name="intermediate_lvl_3_col3">#fedc97</string>
     <string name="intermediate_lvl_3_col4">#28666e</string>
-
     <integer name="intermediate_lvl_3_max_turns">10</integer>
 
 
     <!-- EXPERT DIFFICULTY ASSETS -->
     <!-- Level 1 Assets -->
     <string name="expert_lvl_1_name">Forest</string>
-
     <string name="expert_lvl_1_col1">#2e0014</string>
     <string name="expert_lvl_1_col2">#809848</string>
     <string name="expert_lvl_1_col3">#b5dead</string>
     <string name="expert_lvl_1_col4">#fd96a9</string>
-
     <integer name="expert_lvl_1_max_turns">10</integer>
 
     <!-- Level 2 Assets -->
     <string name="expert_lvl_2_name">Circus</string>
-
     <string name="expert_lvl_2_col1">#e83151</string>
     <string name="expert_lvl_2_col2">#dbd4d3</string>
     <string name="expert_lvl_2_col3">#387780</string>
     <string name="expert_lvl_2_col4">#757780</string>
-
     <integer name="expert_lvl_2_max_turns">10</integer>
 
     <!-- Level 3 Assets -->
     <string name="expert_lvl_3_name">Sunrise</string>
-
     <string name="expert_lvl_3_col1">#0b032d</string>
     <string name="expert_lvl_3_col2">#f67e7d</string>
     <string name="expert_lvl_3_col3">#843b62</string>
     <string name="expert_lvl_3_col4">#ffb997</string>
-
     <integer name="expert_lvl_3_max_turns">10</integer>
-
 
 </resources>

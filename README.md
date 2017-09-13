@@ -1,7 +1,7 @@
 <img src="http://i64.tinypic.com/xbd1dt.jpg" width="250">
 
 # hue
-__hue__ is a puzzle color-matching game made for Android. 
+__hue__ is a color-matching puzzle game made for Android. 
 
 
 It is heavily inspired by the iOS application _"I love Hue"_. Please check them out.

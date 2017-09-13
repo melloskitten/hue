@@ -24,11 +24,15 @@ public class ColorTileGenerator {
     public ColorTile lowerLeftTile;
     public ColorTile lowerRightTile;
 
+    // Needed for creating the mask for hints. Needed for harder levels, otherwise
+    // the levels are not doable in a reasonable amonut of time
+    public int hintMode;
+
 
     // MARK: CONSTRUCTORS
     public ColorTileGenerator (ColorTile upperLeftTile, ColorTile upperRightTile,
                                ColorTile lowerLeftTile, ColorTile lowerRightTile,
-                               int columnLength, int rowLength) {
+                               int columnLength, int rowLength, int hintMode) {
         this.upperLeftTile = upperLeftTile;
         this.upperRightTile = upperRightTile;
         this.lowerLeftTile = lowerLeftTile;
@@ -36,11 +40,12 @@ public class ColorTileGenerator {
         this.columnLength = columnLength;
         this.rowLength = rowLength;
         this.generatedColorTiles = new ColorTile[rowLength*columnLength];
+        this.hintMode = hintMode;
     }
 
     public ColorTileGenerator(Color UPPER_LEFT, Color UPPER_RIGHT,
                               Color LOWER_LEFT, Color LOWER_RIGHT,
-                              int columnLength, int rowLength) {
+                              int columnLength, int rowLength, int hintMode) {
 
         this.upperLeftTile = new ColorTile(UPPER_LEFT, UPPER_LEFT, false, false);
         this.upperRightTile = new ColorTile(UPPER_RIGHT, UPPER_RIGHT, false, false);
@@ -49,11 +54,12 @@ public class ColorTileGenerator {
         this.rowLength = rowLength;
         this.columnLength = columnLength;
         this.generatedColorTiles = new ColorTile[rowLength*columnLength];
+        this.hintMode = hintMode;
     }
 
     public ColorTileGenerator(String upper_left, String upper_right,
                               String lower_left, String lower_right,
-                              int columnLength, int rowLength) {
+                              int columnLength, int rowLength, int hintMode) {
 
         Color UPPER_LEFT = ColorWrapper.prsCol(upper_left);
         Color UPPER_RIGHT = ColorWrapper.prsCol(upper_right);
@@ -67,6 +73,7 @@ public class ColorTileGenerator {
         this.rowLength = rowLength;
         this.columnLength = columnLength;
         this.generatedColorTiles = new ColorTile[rowLength*columnLength];
+        this.hintMode = hintMode;
 
     }
 
@@ -133,19 +140,62 @@ public class ColorTileGenerator {
     }
 
 
-    // FIXME: For now, the hinted ColorTiles are always going to be in the corners. (SEMI HARD)
     // Locks ColorTiles and makes hints that are supposed to help the user and make the game easier.
     public void setHintTiles() {
 
-        generatedColorTiles[0].setHint(true);
-        generatedColorTiles[columnLength-1].setHint(true);
+        switch (hintMode) {
+            case HintMode.EASY:
+                generateCornerHints();
+                break;
+            case HintMode.INTERMEDIATE:
+                generateMod2Hints();
+                break;
+            case HintMode.RECTANGLE:
+                generateRectangleHints();
+                break;
 
-        generatedColorTiles[generatedColorTiles.length-1].setHint(true);
-        generatedColorTiles[generatedColorTiles.length - columnLength].setHint(true);
+        }
 
     }
 
+    // Creates a hint every second tile. Used for harder levels.
+    private void generateMod2Hints() {
+        for (int i=0; i < generatedColorTiles.length; i++) {
+            if (i%2==0) {
+                generatedColorTiles[i].setHint(true);
+            }
+        }
+    }
+
+
+    // Generates Hints in the 4 corners of the game field.
+    private void generateCornerHints() {
+        generatedColorTiles[0].setHint(true);
+        generatedColorTiles[columnLength-1].setHint(true);
+        generatedColorTiles[generatedColorTiles.length-1].setHint(true);
+        generatedColorTiles[generatedColorTiles.length - columnLength].setHint(true);
+    }
+
+    // Generates hints along the edges of the game field
+    private void generateRectangleHints() {
+        for (int i=0; i< generatedColorTiles.length; i++) {
+
+            if (i<columnLength || (generatedColorTiles.length-columnLength <= i) ) {
+                generatedColorTiles[i].setHint(true);
+            }
+
+
+        }
+    }
 
 
 }
+
+class HintMode {
+    public static final int EASY = 0;
+    public static final int INTERMEDIATE = 1;
+    public static final int RECTANGLE = 2;
+}
+
+
 

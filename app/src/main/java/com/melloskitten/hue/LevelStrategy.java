@@ -10,11 +10,13 @@ abstract class LevelStrategy {
     public String[] hexCodes;
     public int rowLength;
     public int columnLength;
+    public int hintMode;
 
     public LevelStrategy(String[] hexCodes) {
         this.hexCodes = hexCodes;
         this.rowLength = 0;
         this.columnLength = 0;
+        this.hintMode = 0;
     }
 
 }
@@ -26,10 +28,11 @@ class EasyLevelStrategy extends LevelStrategy {
         super(hexCodes);
         this.columnLength = 5;
         this.rowLength = 4;
+        this.hintMode = 0;
     }
 }
 
-// Easy Levels are at most 5*5 big.
+// Intermediate Levels are at most 5*5 big.
 class IntermediateLevelStrategy extends LevelStrategy {
 
 
@@ -38,13 +41,23 @@ class IntermediateLevelStrategy extends LevelStrategy {
         this.columnLength = 5;
         this.rowLength = 5;
     }
+
+    public IntermediateLevelStrategy(String[] hexCodes, int hintMode) {
+        super(hexCodes);
+        this.columnLength = 5;
+        this.rowLength = 5;
+        this.hintMode = hintMode;
+    }
 }
 
 class HardLevelStrategy extends LevelStrategy {
 
 
-    public HardLevelStrategy(String[] hexCodes) {
+    public HardLevelStrategy(String[] hexCodes, int hintMode) {
         super(hexCodes);
+        this.columnLength = 7;
+        this.rowLength = 7;
+        this.hintMode = hintMode;
     }
 }
 

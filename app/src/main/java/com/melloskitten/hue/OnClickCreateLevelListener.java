@@ -23,6 +23,7 @@ public class OnClickCreateLevelListener implements View.OnClickListener {
         intent.putExtra("hexCodes", strategy.hexCodes);
         intent.putExtra("rowLength", strategy.rowLength);
         intent.putExtra("columnLength", strategy.columnLength);
+        intent.putExtra("hintMode", strategy.hintMode);
 
         firstActivity.startActivity(intent);
         firstActivity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);

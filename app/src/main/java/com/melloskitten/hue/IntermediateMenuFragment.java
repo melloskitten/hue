@@ -34,11 +34,11 @@ public class IntermediateMenuFragment extends Fragment {
 
         // Set the Intermediate Strategies
         LevelStrategy lvl_1_strategy = new IntermediateLevelStrategy(new String[]{getString(R.string.intermediate_lvl_1_col1), getString(R.string.intermediate_lvl_1_col2),
-                getString(R.string.intermediate_lvl_1_col3), getString(R.string.intermediate_lvl_1_col4)});
+                getString(R.string.intermediate_lvl_1_col3), getString(R.string.intermediate_lvl_1_col4)},2);
         LevelStrategy lvl_2_strategy = new IntermediateLevelStrategy(new String[]{getString(R.string.intermediate_lvl_2_col1), getString(R.string.intermediate_lvl_2_col2),
                 getString(R.string.intermediate_lvl_2_col3), getString(R.string.intermediate_lvl_2_col4)});
         LevelStrategy lvl_3_strategy = new IntermediateLevelStrategy(new String[]{getString(R.string.intermediate_lvl_3_col1), getString(R.string.intermediate_lvl_3_col2),
-                getString(R.string.intermediate_lvl_3_col3), getString(R.string.intermediate_lvl_3_col4)});
+                getString(R.string.intermediate_lvl_3_col3), getString(R.string.intermediate_lvl_3_col4)}, 1);
 
 
         // Add the event listeners

@@ -1,6 +1,10 @@
 package com.melloskitten.hue;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.DragEvent;
@@ -8,7 +12,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -17,6 +24,7 @@ public class GameActivity extends AppCompatActivity {
     private String[] hexCodes;
     private int rowLength;
     private int columnLength;
+    private int hintMode;
     public static int oldPos = 0;
     public static int newPos = 0;
     GridView gridView;
@@ -33,7 +41,7 @@ public class GameActivity extends AppCompatActivity {
 
         // Create the game field with given params.
         ColorTile[] generatedColorTiles = ColorTileFactory.getGameColorTiles(hexCodes,
-                columnLength, rowLength);
+                columnLength, rowLength, hintMode);
 
 
         // Set adapter and init gridView.
@@ -53,6 +61,7 @@ public class GameActivity extends AppCompatActivity {
         hexCodes = intent.getStringArrayExtra("hexCodes");
         rowLength = intent.getIntExtra("rowLength", 0);
         columnLength = intent.getIntExtra("columnLength", 0);
+        hintMode = intent.getIntExtra("hintMode", 0);
     }
 
     private GridView setUpGridView(ColorTile[] generatedColorTiles) {
@@ -120,7 +129,7 @@ class CustomOnDragListener implements AdapterView.OnDragListener {
 
     // MARK: ONDRAG METHODS
     @Override
-    public boolean onDrag(View view, DragEvent dragEvent) {
+    public boolean onDrag(final View view, DragEvent dragEvent) {
 
         final int action = dragEvent.getAction();
 
@@ -155,14 +164,69 @@ class CustomOnDragListener implements AdapterView.OnDragListener {
                     tileAdapter.swap(newPos, oldPos);
 
 
-                    // FIXME: Proper game ending.
                     if (tileAdapter.isPuzzleSolved()) {
-                        Toast.makeText(view.getContext(),
-                                "The game is finished!", Toast.LENGTH_SHORT).show();
+
+                        showFinishedGamePrompt(view);
+
                     }
                 }
                 return true;
         }
         return false;
+    }
+
+    private void showFinishedGamePrompt(View view) {
+        final AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(view.getContext(), android.R.style.Theme_Material_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(view.getContext());
+        }
+        builder.setTitle("")
+                .setMessage("Congratulations, you finished the level!")
+                .setNeutralButton("Done", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        try {
+                            getActivity().finish();
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        } catch (NoSuchMethodException e) {
+                            e.printStackTrace();
+                        } catch (NoSuchFieldException e) {
+                            e.printStackTrace();
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        } catch (InvocationTargetException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+    public static Activity getActivity() throws ClassNotFoundException, NoSuchMethodException, NoSuchFieldException, IllegalAccessException, InvocationTargetException {
+        Class activityThreadClass = Class.forName("android.app.ActivityThread");
+        Object activityThread = activityThreadClass.getMethod("currentActivityThread").invoke(null);
+        Field activitiesField = activityThreadClass.getDeclaredField("mActivities");
+        activitiesField.setAccessible(true);
+
+        Map<Object, Object> activities = (Map<Object, Object>) activitiesField.get(activityThread);
+        if (activities == null)
+            return null;
+
+        for (Object activityRecord : activities.values()) {
+            Class activityRecordClass = activityRecord.getClass();
+            Field pausedField = activityRecordClass.getDeclaredField("paused");
+            pausedField.setAccessible(true);
+            if (!pausedField.getBoolean(activityRecord)) {
+                Field activityField = activityRecordClass.getDeclaredField("activity");
+                activityField.setAccessible(true);
+                Activity activity = (Activity) activityField.get(activityRecord);
+                return activity;
+            }
+        }
+
+        return null;
     }
 }

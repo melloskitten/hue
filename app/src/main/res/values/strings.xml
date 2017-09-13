@@ -6,9 +6,8 @@
 
 
     <!-- Main Menu Assets -->
-    <string name="how_to_desc">Place the colo tiles to generate a smooth gradient. Some color tiles
-        cannot be moved, use them as hints for progress. Try to stay under the maximum of
-        color tile swaps for a level.
+    <string name="how_to_desc">Place the color tiles to generate a smooth gradient. Some color tiles
+        cannot be moved, use them as hints for progress.
         Have fun!
     </string>
 
@@ -85,14 +84,34 @@
 
     <!-- EXPERT DIFFICULTY ASSETS -->
     <!-- Level 1 Assets -->
-    <string name="expert_lvl_1_name">Candy</string>
+    <string name="expert_lvl_1_name">Forest</string>
 
-    <string name="expert_lvl_1_col1">#470063</string>
-    <string name="expert_lvl_1_col2">#b30089</string>
-    <string name="expert_lvl_1_col3">#f62dae</string>
+    <string name="expert_lvl_1_col1">#2e0014</string>
+    <string name="expert_lvl_1_col2">#809848</string>
+    <string name="expert_lvl_1_col3">#b5dead</string>
     <string name="expert_lvl_1_col4">#fd96a9</string>
 
     <integer name="expert_lvl_1_max_turns">10</integer>
+
+    <!-- Level 2 Assets -->
+    <string name="expert_lvl_2_name">Circus</string>
+
+    <string name="expert_lvl_2_col1">#e83151</string>
+    <string name="expert_lvl_2_col2">#dbd4d3</string>
+    <string name="expert_lvl_2_col3">#387780</string>
+    <string name="expert_lvl_2_col4">#757780</string>
+
+    <integer name="expert_lvl_2_max_turns">10</integer>
+
+    <!-- Level 3 Assets -->
+    <string name="expert_lvl_3_name">Sunrise</string>
+
+    <string name="expert_lvl_3_col1">#0b032d</string>
+    <string name="expert_lvl_3_col2">#f67e7d</string>
+    <string name="expert_lvl_3_col3">#843b62</string>
+    <string name="expert_lvl_3_col4">#ffb997</string>
+
+    <integer name="expert_lvl_3_max_turns">10</integer>
 
 
 </resources>

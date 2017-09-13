@@ -81,7 +81,8 @@ public class TileAdapter extends BaseAdapter {
         // FIXME: Make Hint Tiles more prominent, e.g. with circle on them or smth.
 
         if (curTile.isHint() && curTile != null) {
-            tileView.setText("X");
+            tileView.setText("\u25A0");
+            tileView.setTextColor(Color.BLACK);
             tileView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             tileView.setGravity(Gravity.CENTER);
         }

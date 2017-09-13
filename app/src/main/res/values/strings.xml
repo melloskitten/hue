@@ -7,12 +7,12 @@
 
     <!-- Main Menu Assets -->
     <string name="how_to_desc">Place the colo tiles to generate a smooth gradient. Some color tiles
-        cannot be moved, use them as hints for further progression. Try to stay under the maximum of
+        cannot be moved, use them as hints for progress. Try to stay under the maximum of
         color tile swaps for a level.
         Have fun!
     </string>
 
-    <string name="about_desc">Hue is heavily inspired by the iOS application "I love Hue".
+    <string name="about_desc">Hue is heavily inspired by the iOS application <b>"I love Hue"</b>.
     Please check it out, it\'s an awesome game. I made this game as a starter project to get into
     Android programming, please bear with potential bugs.</string>
 

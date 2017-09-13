@@ -42,6 +42,7 @@ public class MenuCollectionActivity extends FragmentActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabDots);
         tabLayout.setupWithViewPager(viewPager, true);
         viewPager.setAdapter(pagerAdapter);
+        viewPager.setPageTransformer(false, new FadePageTransformer());
 
     }
 }

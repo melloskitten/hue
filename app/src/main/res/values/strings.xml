@@ -8,7 +8,7 @@
     <!-- Main Menu Assets -->
     <string name="how_to_desc">Place the color tiles to generate a smooth gradient. Some color tiles
         cannot be moved, use them as hints for progress.
-        Have fun!
+        Have fun! \u2764
     </string>
     <string name="about_desc">Hue is heavily inspired by the iOS application <b>"I love Hue"</b>.
     Please check it out, it\'s an awesome game. I made this game as a starter project to get into

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.TextView;
 
 // Fragment that holds all the Easy Levels.
@@ -27,7 +28,7 @@ public class EasyMenuFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        Button easy_lvl_1 = (Button) getView().findViewById(R.id.easy_1);
+        /*Button easy_lvl_1 = (Button) getView().findViewById(R.id.easy_1);
         Button easy_lvl_2 = (Button) getView().findViewById(R.id.easy_2);
         Button easy_lvl_3 = (Button) getView().findViewById(R.id.easy_3);
 
@@ -44,7 +45,7 @@ public class EasyMenuFragment extends Fragment {
         // Add the event listeners
         easy_lvl_1.setOnClickListener(new OnClickCreateLevelListener(getActivity(), GameActivity.class, lvl_1_strategy));
         easy_lvl_2.setOnClickListener(new OnClickCreateLevelListener(getActivity(), GameActivity.class, lvl_2_strategy));
-        easy_lvl_3.setOnClickListener(new OnClickCreateLevelListener(getActivity(), GameActivity.class, lvl_3_strategy));
+        easy_lvl_3.setOnClickListener(new OnClickCreateLevelListener(getActivity(), GameActivity.class, lvl_3_strategy));*/
     }
 
 
@@ -55,6 +56,17 @@ public class EasyMenuFragment extends Fragment {
         TextView textView = (TextView) view.findViewById(R.id.easy_menu_header);
         Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "roboto-thin.ttf");
         textView.setTypeface(font);
+
+
+        GridView gridView = (GridView) view.findViewById(R.id.easy_menu_gridview);
+        // FIXME: Hardcoded string here
+
+        String [] dummy = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"};
+        if(gridView != null){
+            gridView.setAdapter(new LevelAdapter(getActivity(), dummy));
+        }
+
+
         return view;
     }
 

@@ -1,5 +1,6 @@
 package com.melloskitten.hue;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
@@ -16,29 +17,33 @@ public class LevelAdapter extends BaseAdapter {
 
     // MARK: VARS
     private Context mContext;
+    // Color for the text
+    private int hexColor;
+    private Activity mActivity;
 
     // FIXME: For the moment this is simply a string.
-    private String[] levelDescription;
-
+    private LevelStrategy[] levelStrategies;
 
 
     // MARK: CONSTRUCTOR
-    public LevelAdapter(Context c, String[] levelDescription) {
+    public LevelAdapter(Context c, int hexColor, Activity mActivity,
+                        LevelStrategy[] levelStrategies) {
         this.mContext = c;
-        this.levelDescription = levelDescription;
-
+        this.hexColor = hexColor;
+        this.mActivity = mActivity;
+        this.levelStrategies = levelStrategies;
     }
 
 
     // MARK: OVERRIDE METHODS
     @Override
     public int getCount() {
-        return levelDescription.length;
+        return levelStrategies.length;
     }
 
     @Override
     public Object getItem(int i) {
-        return levelDescription[i];
+        return levelStrategies[i];
     }
 
     @Override
@@ -49,17 +54,20 @@ public class LevelAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
 
-
+        // Make the buttons a square.
         GridView gridView = (GridView) viewGroup;
         int size = gridView.getRequestedColumnWidth();
-
         Button button = new Button(mContext);
         button.setLayoutParams(new GridView.LayoutParams(size, size));
+
+        // Adjust the view.
         button.setBackground(mContext.getDrawable(R.drawable.circle));
-        button.setText(levelDescription[position]);
-        button.setTextColor(Color.BLACK);
+        button.setText(String.valueOf(position+1));
+        button.setTextColor(hexColor);
 
-
+        // Add the onclick listener for every button.
+        LevelStrategy levelStrategy = levelStrategies[position];
+        button.setOnClickListener(new OnClickCreateLevelListener(mActivity, GameActivity.class, levelStrategy));
 
         return button;
     }

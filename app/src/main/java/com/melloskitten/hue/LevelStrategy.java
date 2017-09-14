@@ -33,7 +33,15 @@ class EasyLevelStrategy extends LevelStrategy {
         super(hexCodes);
         this.columnLength = 5;
         this.rowLength = 4;
-        this.hintMode = 0;
+        this.hintMode = HintMode.EASY;
+    }
+
+    // Will enable a new hintmode
+    public EasyLevelStrategy(String[] hexCodes, int hintMode) {
+        super(hexCodes);
+        this.columnLength = 5;
+        this.rowLength = 4;
+        this.hintMode = hintMode;
     }
 }
 

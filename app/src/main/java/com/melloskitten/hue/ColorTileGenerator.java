@@ -149,10 +149,14 @@ public class ColorTileGenerator {
             case HintMode.INTERMEDIATE:
                 generateMod2Hints();
                 break;
+            case HintMode.STRIP_TOP_BOTTOM:
+                generateStripTopBottomHints();
+                break;
+            case HintMode.STRIP_LEFT_RIGHT:
+                generateStripLeftRightHints();
+                break;
             case HintMode.RECTANGLE:
                 generateRectangleHints();
-                break;
-
         }
 
     }
@@ -176,11 +180,28 @@ public class ColorTileGenerator {
 
     // Generates hints along the edges of the game field
     private void generateRectangleHints() {
+
+        generateStripLeftRightHints();
+        generateStripTopBottomHints();
+    }
+
+    // Generates hints in the top and bottom row of the game field
+    private void generateStripTopBottomHints() {
         for (int i = 0; i < generatedColorTiles.length; i++) {
             if (i < columnLength || (generatedColorTiles.length - columnLength <= i)) {
                 generatedColorTiles[i].setHint(true);
             }
         }
     }
+
+    // Generates hints in the leftmost and rightmost column of the game field;
+    private void generateStripLeftRightHints() {
+        for (int i = 0; i < generatedColorTiles.length; i++) {
+            if ((i % columnLength == 0) || ((i % columnLength) == (columnLength - 1))) {
+                generatedColorTiles[i].setHint(true);
+            }
+        }
+    }
+
 
 }

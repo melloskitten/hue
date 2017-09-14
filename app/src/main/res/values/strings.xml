@@ -40,6 +40,31 @@
     <string name="easy_lvl_3_col4">#93e1d8</string>
     <integer name="easy_lvl_3_max_turns">10</integer>
 
+    <!-- Level 4 Assets -->
+    <string name="easy_lvl_4_name">Forest</string>
+    <string name="easy_lvl_4_col1">#34252f</string>
+    <string name="easy_lvl_4_col2">#3b5249</string>
+    <string name="easy_lvl_4_col3">#519872</string>
+    <string name="easy_lvl_4_col4">#bec5ad</string>
+    <integer name="easy_lvl_4_max_turns">10</integer>
+
+    <!-- Level 5 Assets -->
+    <string name="easy_lvl_5_name">Mint</string>
+    <string name="easy_lvl_5_col1">#605b56</string>
+    <string name="easy_lvl_5_col2">#837a75</string>
+    <string name="easy_lvl_5_col3">#acc18a</string>
+    <string name="easy_lvl_5_col4">#dafeb7</string>
+    <integer name="easy_lvl_5_max_turns">10</integer>
+
+    <!-- Level 6 Assets -->
+    <string name="easy_lvl_6_name">Rapid</string>
+    <string name="easy_lvl_6_col1">#280004</string>
+    <string name="easy_lvl_6_col2">#4c230a</string>
+    <string name="easy_lvl_6_col3">#a53f2b</string>
+    <string name="easy_lvl_6_col4">#ccc9a1</string>
+    <integer name="easy_lvl_6_max_turns">10</integer>
+
+
 
     <!-- INTERMEDIATE DIFFICULTY ASSETS -->
     <!-- Level 1 Assets -->
@@ -65,6 +90,24 @@
     <string name="intermediate_lvl_3_col3">#fedc97</string>
     <string name="intermediate_lvl_3_col4">#28666e</string>
     <integer name="intermediate_lvl_3_max_turns">10</integer>
+
+    <!-- Level 4 Assets -->
+    <string name="intermediate_lvl_4_col1">#963484</string>
+    <string name="intermediate_lvl_4_col2">#3066be</string>
+    <string name="intermediate_lvl_4_col3">#28c2ff</string>
+    <string name="intermediate_lvl_4_col4">#2af5ff</string>
+
+    <!-- Level 5 Assets -->
+    <string name="intermediate_lvl_5_col1">#283845</string>
+    <string name="intermediate_lvl_5_col2">#b8b08d</string>
+    <string name="intermediate_lvl_5_col3">#f2d492</string>
+    <string name="intermediate_lvl_5_col4">#f29559</string>
+
+    <!-- Level 6 Assets -->
+    <string name="intermediate_lvl_6_col1">#a03e99</string>
+    <string name="intermediate_lvl_6_col2">#df57bc</string>
+    <string name="intermediate_lvl_6_col3">#f6828c</string>
+    <string name="intermediate_lvl_6_col4">#f59ca9</string>
 
 
     <!-- EXPERT DIFFICULTY ASSETS -->
